@@ -10,9 +10,9 @@ import Task from "./pages/ToDoList.jsx";
 function App(){
 
     return(
-        <div>
+        <>
             <Router>
-                <ul>
+                {/* <ul>
         			<li>
         				<Link to="/">Home</Link>
         			</li>
@@ -25,7 +25,7 @@ function App(){
                     <li>
                         <Link to="/to-do-list">To-Do-List</Link>
                     </li>
-    			</ul>
+    			</ul> */}
 
                 <Routes>
     				<Route exact path='/' element={< HomePage />}></Route>
@@ -36,7 +36,7 @@ function App(){
 
             </Router>
 
-        </div>
+        </>
     );
 }
 
