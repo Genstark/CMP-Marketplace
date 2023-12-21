@@ -3,6 +3,7 @@ import NewElement from "../assets/NewElement";
 
 function Task(){
     const [list, setList] = useState([]);
+    const [userInput, setUserInput] = useState('');
 
     useEffect(() => {
         // This code block will run after every render, including when arry is updated
@@ -11,17 +12,16 @@ function Task(){
     }, [list]);
 
     function click(){
-        const userInput = document.getElementById('user');
-
         const userData = {
-            title: userInput.value,
+            title: userInput,
             id: getRandomNumber(1, 100000),
             done: false
         };
 
         setList([...list, userData]);
         // createNewELement(userData.title, userData.id);
-        userInput.value = '';
+        console.log(userInput);
+        setUserInput('');
     }
 
 
@@ -53,13 +53,14 @@ function Task(){
                 break;
             }
         }
+
     }
 
     return(
         <div>
             <div className="headingContainer">
                 <h1 className="heading">To Do List</h1>
-                <input type="text" placeholder="enter anything" alt="user input" id="user" className="inputTask" />
+                <input type="text" placeholder="enter anything" alt="user input" id="user" className="inputTask" onChange={(e) => setUserInput(e.target.value)} />
                 <button onClick={click} className="addTask">Add Task</button>
             </div>
 

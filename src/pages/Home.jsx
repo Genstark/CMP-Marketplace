@@ -7,15 +7,16 @@ function HomePage(){
     return(
         <>
             <div className="home-page">
-                <h3 className="heading">OLX</h3>
+                <h3 className="heading">Compro Marketplace</h3>
                 <input type="input" className="userinput" />
 
                 <select name="types" id="productType" className="productTypeClass">
-                    <option value="Electronics">Electronics</option>
+                    <option value="" selected>Choose Type</option>
+                    <option value="Electronics" style={{fontSize: 30}}>Electronics</option>
                     <option value="Bike">Bike</option>
                 </select>
 
-                <button className="buttonClass">Search</button>
+                <button className="searchButton">Search</button>
 
                 <div className="loginClass">
                     <img src={userImge} className="userImage" alt='user "profile" image' />
@@ -23,11 +24,11 @@ function HomePage(){
                 </div>
             </div>
 
-            <div className="itemCard">
+            {/* <div className="itemCard">
                 <div className="card">
                     
                 </div>
-            </div>
+            </div> */}
             
         </>
     );
