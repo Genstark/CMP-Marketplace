@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import '../styling/Home.css';
 import userImge from '../image/user.png';
 import { Link } from "react-router-dom";
@@ -10,32 +10,29 @@ function HomePage(){
     const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
-        if (isInitialRender) {
-            setIsInitialRender(false);
-            return;
-        }
-        
-        const url = 'https://air-quality-by-api-ninjas.p.rapidapi.com/v1/airquality?city=Seattle';
+        // if (isInitialRender) {
+        //     setIsInitialRender(false);
+        //     return;
+        // }
+
+        const apiUrl = 'http://localhost:2000/items';
         const options = {
-        	method: 'GET',
-        	headers: {
-        		'X-RapidAPI-Key': '55cfd3b5e1msh42db4a25dc6d649p1e5846jsnd7f392ecde15',
-        		'X-RapidAPI-Host': 'air-quality-by-api-ninjas.p.rapidapi.com'
-        	}
-        };
+            method: 'GET'
+        }
 
-        // fetch(url, options).then(res => {
-        //     return res.json();
-        // }).then(data => {
-        //     setApiData([...apiData, data]);
-        //     console.log(apiData);
-        // }).catch(error => {
-        //     console.log("Error in Fetching Data");
-        // });
+        fetch(apiUrl, options).then(res => {
+            return res.json();
+        }).then(data => {
+            setApiData(data['data']);
 
-    }, [isInitialRender]);
+        }).catch(error => {
+            console.log("Error in Fetching Data");
+        });
 
-    // console.log(apiData);
+    }, []);
+
+    console.log(apiData);
+
     function getRandomNumber(min, max) {
         const randomNumber = Math.random();
         const scaledNumber = min + Math.floor(randomNumber * (max - min + 1));
@@ -64,11 +61,9 @@ function HomePage(){
 
             <div className="itemCard">
                 <ul>
-                    {apiData.map((items, index) => {
-                        return(
-                            <li key={index}>{items.overall_aqi} {items.CO.aqi}</li>
-                        )
-                    })}
+                    {apiData.map((object, index) => <li key={object._id}>{object.userName} {object.phoneNumber} {index} {object.title}
+                                                <img src={object['image-1'].data} style={{width: 100, height: 100}} />
+                                            </li>)}
                 </ul>
             </div>
             
