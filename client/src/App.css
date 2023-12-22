@@ -1,0 +1,44 @@
+.headingContainer{
+    width: fit-content;
+    margin: auto;
+}
+
+.heading{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    text-align: center;
+}
+
+.inputTask{
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.addTask{
+    font-size: 20px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.taskContainer{
+    width: 80%;
+    margin: auto;
+    border: 2px solid black;
+    height: 21px;
+    margin-top: 5px;
+}
+
+.checkbox{
+    position: relative;
+    vertical-align: bottom;
+    cursor: pointer;
+}
+
+.task{
+    display: inline-block;
+    font-size: 18px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+.deleteTask{
+    float: right;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
