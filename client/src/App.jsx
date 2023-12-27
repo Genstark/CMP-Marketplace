@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './App.css';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import HomePage from "./pages/Home.jsx";
-import AboutPage from "./pages/about.jsx";
+import SingleProduct from "./pages/SingleProduct.jsx";
 import MenuPage from "./pages/menu.jsx";
 import Task from "./pages/ToDoList.jsx";
 
@@ -29,7 +29,7 @@ function App(){
 
                 <Routes>
     				<Route exact path='/' element={< HomePage />}></Route>
-    				<Route exact path='/about' element={< AboutPage />}></Route>
+    				<Route exact path='/item' element={< SingleProduct />}></Route>
                     <Route exact path='/menu' element={< MenuPage />}></Route>
                     <Route exact path='/to-do-list' element={< Task />}></Route>
 			    </Routes>

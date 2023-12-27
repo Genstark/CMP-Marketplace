@@ -39,16 +39,20 @@ function HomePage(){
         return scaledNumber;
     }
 
+    function changeLocation(){
+        window.location.href = '/item';
+    }
+
     return(
         <>
             <div className="home-page">
                 <h3 className="heading">Compro Marketplace</h3>
-                <input type="input" className="userinput" />
+                <input type="input" className="userinput" placeholder="search item" />
 
-                <select name="types" id="productType" className="productTypeClass">
-                    <option value="none">Choose Type</option>
-                    <option value="Electronics">Electronics</option>
-                    <option value="Bike">Bike</option>
+                <select name="types" id="productType" className="productTypeClass" alt="choose product type" title="choose product type">
+                    <option value="none" alt="nothing">Choose Type</option>
+                    <option value="Electronics" alt="Electronics">Electronics</option>
+                    <option value="Bike" alt="Bike">Bike</option>
                 </select>
 
                 <button className="searchButton">Search</button>
@@ -60,11 +64,20 @@ function HomePage(){
             </div>
 
             <div className="itemCard">
-                <ul>
-                    {apiData.map((object, index) => <li key={object._id}>{object.userName} {object.phoneNumber} {index} {object.title}
+                {/* <ul>
+                    {apiData.map((object, index) => <li key={object._id}>{object.userName} {object.phoneNumber} {object.title} {object.Address}<br />
                                                 <img src={object['image-1'].data} style={{width: 100, height: 100}} />
+                                                <img src={object['image-2'].data} style={{width: 100, height: 100}} />
+                                                <img src={object['image-3'].data} style={{width: 100, height: 100}} />
                                             </li>)}
-                </ul>
+                </ul> */}
+
+                {apiData.map((object) => <div className="item" key={object._id} onClick={changeLocation}>
+                    <img src={object['image-1'].data} alt="image testing" className="itemImage" />
+                    <h1 className="itemName">{object.title}</h1>
+                    <p className="itemOverView">{object.overview}</p>
+                    <p className="itemLocation">{object.state}</p>
+                </div>)}
             </div>
             
         </>

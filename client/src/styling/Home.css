@@ -43,7 +43,7 @@
     margin-right: 0px;
     border-radius: 8px;
     box-sizing: border-box;
-    width: 8%;
+    width: 12%;
     padding-left: 14px;
     font-weight: 700;
 }
@@ -52,7 +52,7 @@
     border-radius: 8px;
     border-width: 1px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    width: 10%;
+    width: 11%;
     font-weight: 700;
     cursor: pointer;
     margin-top: auto;
@@ -95,6 +95,54 @@
 
 .loginRegister:hover{
     text-decoration: underline;
+}
+
+.itemCard{
+    width: 80%;
+    /* border: 1px solid black; */
+    margin: auto;
+    margin-top: 3px;
+    height: fit-content;
+}
+
+.item{
+    width: 98%;
+    border: 2px solid black;
+    margin: auto;
+    height: 250px;
+    overflow: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.itemImage{
+    width: 250px;
+    height: 100%;
+    float: left;
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
+}
+
+.itemName{
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    margin-left: 15px;
+    margin-top: 10px;
+    margin-bottom: auto;
+    margin-left: 280px;
+}
+
+.itemOverView{
+    margin-left: 280px;
+    margin-top: 20px;
+    font-size: large;
+}
+
+.itemLocation{
+    width: max-content;
+    margin-left: 280px;
+    margin-top: 30px;
 }
 
 
