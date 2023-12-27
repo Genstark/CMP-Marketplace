@@ -8,15 +8,32 @@ function SingleProduct(){
 
     const [textareaValue, setTextareaValue] = useState('');
     const [textareaHeight, setTextareaHeight] = useState('auto');
+    const [apiData, setApiData] = useState([]);
 
     useEffect(() => {
+
         const element = document.getElementById('itemDetail'); // Replace with your textarea ID
-    
+        
         if (element) {
             element.style.height = 'auto';
             element.style.height = element.scrollHeight + 'px';
             setTextareaHeight(element.style.height);
         }
+
+        const currentUrl = window.location.href;
+        const urlFilter = currentUrl.split('/').pop();
+        console.log(urlFilter);
+        const apiUrl = `http://localhost:2000/items/${urlFilter}`;
+        const options = {
+            method: 'GET'
+        }
+
+        fetch(apiUrl, options).then(res => {
+            return res.json();
+        }).then(data => {
+            setApiData([...apiData, data]);
+            console.log(data);
+        });
 
     }, [textareaValue]);
     
@@ -29,6 +46,8 @@ function SingleProduct(){
         marginTop: 3, 
         marginBottom: 3
     }
+
+    console.log(apiData);
 
     return(
         <>
@@ -76,7 +95,7 @@ function SingleProduct(){
                 <div className="priceAndOverview">
                     <div className="priceAndAddress">
                         <h2 style={{marginLeft: 4}}>Overview</h2>
-                        <textarea name="product overview" id="overview" rows="8" className="overviewTextArea"></textarea>
+                        <textarea name="product overview" id="overview" rows="8" className="overviewTextArea" disabled></textarea>
                     </div>
                     <div className="overView">
                         <h2 style={{
@@ -96,8 +115,8 @@ function SingleProduct(){
                 </div>
 
                 <div className="productDetial">
-                    <h2>Details</h2>
-                    <textarea id="myTextarea" value={textareaValue} onChange={handleChange} style={{ height: textareaHeight }}/>
+                    <h2 style={{marginLeft: 4}}>Details</h2>
+                    <textarea id="itemDetail" className="textDetails" value={textareaValue} onChange={handleChange} style={{ height: textareaHeight }} disabled />
                 </div>
             </div>
         </>

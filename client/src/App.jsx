@@ -29,7 +29,7 @@ function App(){
 
                 <Routes>
     				<Route exact path='/' element={< HomePage />}></Route>
-    				<Route exact path='/item' element={< SingleProduct />}></Route>
+    				<Route exact path='/item/:id' element={< SingleProduct />}></Route>
                     <Route exact path='/menu' element={< MenuPage />}></Route>
                     <Route exact path='/to-do-list' element={< Task />}></Route>
 			    </Routes>

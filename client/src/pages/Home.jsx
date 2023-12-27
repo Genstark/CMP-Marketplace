@@ -39,8 +39,8 @@ function HomePage(){
         return scaledNumber;
     }
 
-    function changeLocation(){
-        window.location.href = '/item';
+    function changeLocation(id){
+        window.location.href = `/item/${id}`;
     }
 
     return(
@@ -72,7 +72,7 @@ function HomePage(){
                                             </li>)}
                 </ul> */}
 
-                {apiData.map((object) => <div className="item" key={object._id} onClick={changeLocation}>
+                {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>
                     <img src={object['image-1'].data} alt="image testing" className="itemImage" />
                     <h1 className="itemName">{object.title}</h1>
                     <p className="itemOverView">{object.overview}</p>
