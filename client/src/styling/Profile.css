@@ -1,0 +1,32 @@
+.maincontainer{
+    /* border: 1px solid black; */
+    width: 80%;
+    margin: auto;
+    margin-top: 8px;
+    display: flex;
+}
+
+.profileInfo{
+    border: 1px solid black;
+    width: 30%;
+    display: flex;
+    justify-content: flex-start;
+    border-radius: 8px;
+    flex-wrap: nowrap;
+    flex-direction: column;
+    height: max-content;
+}
+
+.userimage{
+    height: 100px;
+    width: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8px;
+}
+
+.productListings{
+    width: 70%;
+    /* border: 1px solid black; */
+    margin: auto;
+}

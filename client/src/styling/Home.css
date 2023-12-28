@@ -1,102 +1,3 @@
-.home-page{
-    background-color: cadetblue;
-    width: auto;
-    height: fit-content;
-    display: flex;
-    flex-direction: row;
-    height: 70px;
-    /* justify-content: space-between; */
-}
-
-.heading{
-    font-size: 30px;
-    margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-left: 3px;
-    margin-top: auto;
-    margin-bottom: auto;
-}
-
-.userinput{
-    width: 40%;
-    padding: 0;
-    box-sizing: border-box;
-    outline-color: silver;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    border-width: 1px;
-    padding-left: 8px;
-    font-size: larger;
-    border-radius: 8px;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 15px;
-    margin-right: 0px;
-    height: 42px;
-}
-
-.productTypeClass{
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-top: auto;
-    margin-bottom: auto;
-    height: 42px;
-    margin-left: 8px;
-    margin-right: 0px;
-    border-radius: 8px;
-    box-sizing: border-box;
-    width: 12%;
-    padding-left: 14px;
-    font-weight: 700;
-}
-
-.searchButton{
-    border-radius: 8px;
-    border-width: 1px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    width: 11%;
-    font-weight: 700;
-    cursor: pointer;
-    margin-top: auto;
-    margin-bottom: auto;
-    height: 42px;
-    margin-left: 8px;
-}
-
-.loginClass{
-    display: flex;
-    border: 1px solid black;
-    width: fit-content;
-    cursor: pointer;
-    margin-left: auto;
-    margin-right: 3px;
-    border-radius: 8px;
-    margin-top: auto;
-    margin-bottom: auto;
-    height: 42px;
-}
-
-.userImage{
-    position: relative;
-    height: 30px;
-    width: 30px;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 3px;
-}
-
-.loginRegister{
-    position: relative;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 7px;
-    margin-right: 4px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    margin-right: 3px;
-}
-
-.loginRegister:hover{
-    text-decoration: underline;
-}
-
 .itemCard{
     width: 80%;
     /* border: 1px solid black; */
@@ -115,6 +16,7 @@
     margin-bottom: 3px;
     border-radius: 10px;
     cursor: pointer;
+    overflow: hidden;
 }
 
 .itemImage{

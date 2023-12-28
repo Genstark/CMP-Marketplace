@@ -3,8 +3,9 @@ import './App.css';
 import { BrowserRouter as Router,Routes, Route, Link } from 'react-router-dom';
 import HomePage from "./pages/Home.jsx";
 import SingleProduct from "./pages/SingleProduct.jsx";
-import MenuPage from "./pages/menu.jsx";
+import Profile from "./pages/Profile.jsx";
 import Task from "./pages/ToDoList.jsx";
+import FindProduct from "./pages/FindProduct.jsx";
 
 
 function App(){
@@ -30,8 +31,9 @@ function App(){
                 <Routes>
     				<Route exact path='/' element={< HomePage />}></Route>
     				<Route exact path='/item/:id' element={< SingleProduct />}></Route>
-                    <Route exact path='/menu' element={< MenuPage />}></Route>
+                    <Route exact path='/profile/:username/:userid' element={< Profile />}></Route>
                     <Route exact path='/to-do-list' element={< Task />}></Route>
+                    <Route exact path='/items/search/:query' element={< FindProduct />}></Route>
 			    </Routes>
 
             </Router>

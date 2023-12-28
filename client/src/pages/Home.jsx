@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import '../styling/Home.css';
 import userImge from '../image/user.png';
 import { Link } from "react-router-dom";
+import Header from '../component/Header.jsx';
 
 
 function HomePage(){
@@ -33,36 +34,24 @@ function HomePage(){
 
     console.log(apiData);
 
-    function getRandomNumber(min, max) {
-        const randomNumber = Math.random();
-        const scaledNumber = min + Math.floor(randomNumber * (max - min + 1));
-        return scaledNumber;
-    }
-
     function changeLocation(id){
         window.location.href = `/item/${id}`;
     }
 
+    const [search, setSearch] = useState('');
+    function userSearch(value){
+        setSearch(value);
+        console.log(value)
+    }
+
+    function finding(){
+        window.location.href = `/items/search/${search}`;
+    }
+
     return(
         <>
-            <div className="home-page">
-                <h3 className="heading">Compro Marketplace</h3>
-                <input type="input" className="userinput" placeholder="search item" />
-
-                <select name="types" id="productType" className="productTypeClass" alt="choose product type" title="choose product type">
-                    <option value="none" alt="nothing">Choose Type</option>
-                    <option value="Electronics" alt="Electronics">Electronics</option>
-                    <option value="Bike" alt="Bike">Bike</option>
-                </select>
-
-                <button className="searchButton">Search</button>
-
-                <div className="loginClass">
-                    <img src={userImge} className="userImage" alt='user "profile" image' />
-                    <span className="loginRegister">Login/Register</span>
-                </div>
-            </div>
-
+            <Header search={userSearch} clickSearch={finding} />
+            
             <div className="itemCard">
                 {/* <ul>
                     {apiData.map((object, index) => <li key={object._id}>{object.userName} {object.phoneNumber} {object.title} {object.Address}<br />

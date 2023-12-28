@@ -172,6 +172,7 @@
     border: 1px solid black;
     outline: 1px black;
     border-radius: 8px;
+    overflow: hidden;
     box-sizing: border-box;
 }
 
@@ -183,6 +184,7 @@
 .productDetial{
     border: 1px solid black;
     height: max-content;
+    margin-top: 3px;
 }
 
 .textDetails{
@@ -194,4 +196,5 @@
     outline: 1px black;
     border-radius: 8px;
     box-sizing: border-box;
+    overflow: hidden;
 }
