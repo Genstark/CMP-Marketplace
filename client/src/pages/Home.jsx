@@ -1,20 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../styling/Home.css';
-import userImge from '../image/user.png';
-import { Link } from "react-router-dom";
 import Header from '../component/Header.jsx';
-
 
 function HomePage(){
 
     const [apiData, setApiData] = useState([]);
-    const [isInitialRender, setIsInitialRender] = useState(true);
 
     useEffect(() => {
-        // if (isInitialRender) {
-        //     setIsInitialRender(false);
-        //     return;
-        // }
 
         const apiUrl = 'http://localhost:2000/items';
         const options = {
@@ -25,7 +17,6 @@ function HomePage(){
             return res.json();
         }).then(data => {
             setApiData(data['data']);
-
         }).catch(error => {
             console.log("Error in Fetching Data");
         });

@@ -43,11 +43,23 @@ function Profile(){
 
     console.log(apiData);
 
-    
+    function changeLocation(id){
+        window.location.href = `/item/${id}`;
+    }
+
+    const [search, setSearch] = useState('');
+    function userSearch(value){
+        setSearch(value);
+        console.log(value)
+    }
+
+    function finding(){
+        window.location.href = `/items/search/${search}`;
+    }
 
     return(
         <>
-            <Header />
+            <Header search={userSearch} clickSearch={finding} />
 
             <div className="maincontainer">
                 <div className="profileInfo">

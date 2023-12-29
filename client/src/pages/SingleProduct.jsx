@@ -64,9 +64,19 @@ function SingleProduct(){
         window.location.href = `/profile/${username}/${id}`;
     }
 
+    const [search, setSearch] = useState('');
+    function userSearch(value){
+        setSearch(value);
+        console.log(value)
+    }
+
+    function finding(){
+        window.location.href = `/items/search/${search}`;
+    }
+
     return(
         <>
-            <Header />
+            <Header search={userSearch} clickSearch={finding} />
 
             {apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">

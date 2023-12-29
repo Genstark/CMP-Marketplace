@@ -18,16 +18,18 @@ function FindProduct(){
         }
 
         fetch(apiUrl, options).then(res => {
-            return res.json()  // 返回的是一个promise对象，所以我们可以在后面 then
+            return res.json();
         }).then(data => {
             console.log(data);
-            setApiData([data['data']]);
+            setApiData(data['data']);
         }).catch(error => {
             console.log('Error');
         });
 
 
-    });
+    }, []);
+
+    console.log(apiData);
 
     const [search, setSearch] = useState('');
     function userSearch(value){
@@ -37,18 +39,40 @@ function FindProduct(){
 
     function finding(){
         window.location.href = `/items/search/${search}`;
+        
+        const currentUrl = window.location.href;
+        const urlFilter = currentUrl.split('/').pop();
+        const apiUrl = `http://localhost:2000/item/search/${urlFilter}`;
+        const options = {
+            method: 'GET'
+        }
+
+        fetch(apiUrl, options).then(res => {
+            return res.json();
+        }).then(data => {
+            console.log(data);
+            setApiData(data['data']);
+        }).catch(error => {
+            console.log('Error');
+        });
+    }
+
+    function changeLocation(id){
+        window.location.href = `/item/${id}`;
     }
 
     return(
         <>
             <Header search={userSearch} clickSearch={finding} />
 
-            {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>
-                        <img src={object['image-1'].data} alt="image testing" className="itemImage" />
-                        <h1 className="itemName">{object.title}</h1>
-                        <p className="itemOverView">{object.overview}</p>
-                        <p className="itemLocation">{object.state}</p>
-            </div>)}
+            <div className="itemCard">
+                {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>
+                            <img src={object['image-1'].data} alt="image testing" className="itemImage" />
+                            <h1 className="itemName">{object.title}</h1>
+                            <p className="itemOverView">{object.overview}</p>
+                            <p className="itemLocation">{object.state}</p>
+                </div>)}
+            </div>
         </>
     );
 }
