@@ -1,8 +1,23 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import '../styling/Header.css';
 import userImge from '../image/user.png';
 
-function Header({search, clickSearch}){
+function Header({search, clickSearch, toLoginPage}){
+
+    const [loginOrNot, setLoginOrNot] = useState('Login/Register');
+
+    useEffect(() => {
+        function userLogin(){
+            const data = sessionStorage.getItem('data');
+            if(data !== null){
+                setLoginOrNot(data);
+            }
+            else{
+                setLoginOrNot('Login/Register');
+            }
+        }
+        userLogin();
+    }, []);
 
     function Homepage(){
         window.location.href = "/";
@@ -21,9 +36,9 @@ function Header({search, clickSearch}){
 
             <button className="searchButton" onClick={() => clickSearch()}>Search</button>
 
-            <div className="loginClass">
+            <div className="loginClass" onClick={() => toLoginPage()}>
                 <img src={userImge} className="userImage" alt='user "profile" image' />
-                <span className="loginRegister">Login/Register</span>
+                <span className="loginRegister">{loginOrNot}</span>
             </div>
         </div>
     );

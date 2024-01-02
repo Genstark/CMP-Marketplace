@@ -61,9 +61,13 @@ function FindProduct(){
         window.location.href = `/item/${id}`;
     }
 
+    function loginPage(){
+        window.location.href = `/login`;
+    }
+
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
 
             <div className="itemCard">
                 {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>

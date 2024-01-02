@@ -39,9 +39,13 @@ function HomePage(){
         window.location.href = `/items/search/${search}`;
     }
 
+    function loginPage(){
+        window.location.href = `/login`;
+    }
+    
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage}/>
             
             <div className="itemCard">
                 {/* <ul>

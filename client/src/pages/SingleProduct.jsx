@@ -74,9 +74,13 @@ function SingleProduct(){
         window.location.href = `/items/search/${search}`;
     }
 
+    function loginPage(){
+        window.location.href = `/login`;
+    }
+
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
 
             {apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">
