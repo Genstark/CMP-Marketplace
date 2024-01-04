@@ -42,10 +42,14 @@ function HomePage(){
     function loginPage(){
         window.location.href = `/login`;
     }
+
+    function logout(){
+        console.log('working');
+    }
     
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage}/>
+            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} logout={logout} />
             
             <div className="itemCard">
                 {/* <ul>

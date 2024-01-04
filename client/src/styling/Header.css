@@ -82,6 +82,7 @@
     margin-top: auto;
     margin-bottom: auto;
     margin-left: 3px;
+    /* margin-right: 3px; */
 }
 
 .loginRegister{
@@ -92,8 +93,29 @@
     margin-right: 4px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin-right: 3px;
+    font-size: large;
 }
 
 .loginRegister:hover{
     text-decoration: underline;
+}
+
+.dropdown-options {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 10px;
+}
+  
+.dropdown-options li {
+    cursor: pointer;
+    padding: 8px;
+    /* margin-top: 8px; */
+    background-color: cadetblue;
+    height: max-content;
+    font-size: 16px;
+}
+
+.dropdown-options li:hover{
+    background-color: #407076;
 }
