@@ -78,6 +78,16 @@ function SingleProduct(){
         window.location.href = `/login`;
     }
 
+    const showDataOrNot = sessionStorage.getItem('data');
+    function renderMainData(){
+        if(showDataOrNot === null){
+            return false;
+        }
+        else{
+            return true
+        }
+    }
+
     return(
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
@@ -101,7 +111,7 @@ function SingleProduct(){
                     </div>
                     <div style={{width: 'max-content', marginLeft: 18}}>
                         <h3 style={{marginTop: 18, cursor: 'pointer'}} onClick={() => ToProfilePage(object.user_id, object.userName)}>Name: {object.userName}</h3>
-                        <h3 style={{marginTop: 30}}>Contact: {object.phoneNumber}</h3>
+                        <h3 style={{marginTop: 30}}>Contact: {renderMainData() ? object.phoneNumber : '**********'}</h3>
                     </div>
                 </div>
 
@@ -118,12 +128,12 @@ function SingleProduct(){
                         <h3 style={{
                             marginLeft: 8,
                             fontWeight: 'bolder'
-                        }}>Address: {object.Address}</h3>
+                        }}>Address: {renderMainData() ? object.Address : '**********'}</h3>
 
                         <p style={{
                             marginLeft: 8,
                             fontWeight: 'bolder'
-                        }}>{object.state}</p>
+                        }}>{renderMainData() ? object.state : '**********'}</p>
                     </div>
                 </div>
 

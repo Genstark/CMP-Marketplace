@@ -8,6 +8,7 @@ import Task from "./pages/ToDoList.jsx";
 import FindProduct from "./pages/FindProduct.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/SignUp.jsx";
+import AddItem from "./pages/AddItem.jsx";
 
 
 function App(){
@@ -36,8 +37,9 @@ function App(){
                     <Route exact path='/profile/:username/:userid' element={< Profile />}></Route>
                     <Route exact path='/to-do-list' element={< Task />}></Route>
                     <Route exact path='/items/search/:query' element={< FindProduct />}></Route>
-                    <Route extact path='/login' element={< Login />}></Route>
+                    <Route exact path='/login' element={< Login />}></Route>
                     <Route exact path="/signup" element={< Signup />}></Route>
+                    <Route exact path="/addItem" element={< AddItem />}></Route>
 			    </Routes>
 
             </Router>

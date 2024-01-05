@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styling/Header.css';
 import userImge from '../image/user.png';
+import { Link } from "react-router-dom";
 
 
 function Logindropdown({logoutFunction, username}){
@@ -41,10 +42,8 @@ function WithoutLogin({toLoginPage}){
 
 function CustomDropdown({name}){
     const [isOpen, setIsOpen] = useState(false);
-    const [selectedOption, setSelectedOption] = useState(null);
-  
-    const options = ['Option 1', 'Option 2', 'Option 3'];
-  
+    const [selectedOption, setSelectedOption] = useState(name);
+
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
@@ -53,6 +52,21 @@ function CustomDropdown({name}){
         setSelectedOption(option);
         setIsOpen(false);
     };
+
+    function profilePage(){
+        const data = sessionStorage.getItem('data');
+        const token = sessionStorage.getItem('token');
+        window.location.href = `/profile/${data}/${token}`;
+    }
+
+    function addItem(){
+        window.location.href = '/addItem';
+    }
+
+    function logoutFunction(){
+        sessionStorage.clear();
+        window.location.reload();
+    }
   
     return (
         <div className="custom-dropdown">
@@ -61,12 +75,9 @@ function CustomDropdown({name}){
             </div>
             {isOpen && (
                 <ul className="dropdown-options">
-                    {/* {options.map((option, index) => (
-                        <li key={index} onClick={() => handleOptionClick(option)}>{option}</li>
-                    ))} */}
-                    <li onClick={() => console.log('Profile')}>Profile</li>
-                    <li onClick={() => console.log('Add Item')}>Add Item</li>
-                    <li onClick={() => console.log('Logout')}>Logout</li>
+                    <li onClick={profilePage}>Profile</li>
+                    <li onClick={addItem}>Add Item</li>
+                    <li onClick={logoutFunction}>Logout</li>
                 </ul>
             )}
         </div>
@@ -106,7 +117,7 @@ function Header({search, clickSearch, toLoginPage, logout}){
             <select name="types" id="productType" className="productTypeClass" alt="choose product type" title="choose product type">
                 <option value="none" alt="nothing">Choose Type</option>
                 <option value="Electronics" alt="Electronics">Electronics</option>
-                <option value="Bike" alt="Bike" onClick={() => console.log('bike')}>Bike</option>
+                <option value="Bike" alt="Bike">Bike</option>
             </select>
 
             <button className="searchButton" onClick={() => clickSearch()}>Search</button>

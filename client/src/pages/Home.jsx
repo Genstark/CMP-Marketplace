@@ -67,7 +67,6 @@ function HomePage(){
                     <p className="itemLocation">{object.state}</p>
                 </div>)}
             </div>
-            
         </>
     );
 }

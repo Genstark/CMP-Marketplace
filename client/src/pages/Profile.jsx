@@ -28,8 +28,8 @@ function Profile(){
                 // Update state after data is fetched
                 setApiData(data['data']);
                 setUserName(data['data'][0]['userName']);
-                setUserNumber(data['data'][0]['phoneNumber'])
-                setUserAddress(data['data'][0]['Address'])
+                setUserNumber(data['data'][0]['phoneNumber']);
+                setUserAddress(data['data'][0]['Address']);
                 console.log(data);
             } 
             catch (error) {
@@ -61,6 +61,16 @@ function Profile(){
         window.location.href = `/login`;
     }
 
+    const showDataOrNot = sessionStorage.getItem('data');
+    function renderMainData(){
+        if(showDataOrNot === null){
+            return false;
+        }
+        else{
+            return true
+        }
+    }
+
     return(
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
@@ -83,7 +93,7 @@ function Profile(){
 
                     <h3 style={{
                         marginLeft: 16
-                    }}>Contact: {userNumber}</h3>
+                    }}>Contact: {renderMainData() ? userNumber : '*********'}</h3>
                     <hr style={{
                         width: '99%',
                         color: 'black'
@@ -91,7 +101,7 @@ function Profile(){
 
                     <h3 style={{
                         marginLeft: 16
-                    }}>Address: {userAddress}</h3>
+                    }}>Address: {renderMainData() ? userAddress : '**********'}</h3>
                 </div>
 
                 <div className="productListings">

@@ -35,10 +35,10 @@ function Signup(){
             alert('name is empty');
             return;
         }
-        // else if(userNumber.length < 10 || userNumber > 10){
-        //     alert("phone number must be 10 digits");
-        //     return;
-        // }
+        else if(validPhoneNumber(userNumber) === false){
+            alert("phone number must be 10 digits");
+            return;
+        }
         else if(userEmail.trim() === ''){
             alert('email is empty');
             return;
@@ -51,12 +51,17 @@ function Signup(){
             
             const userData = {
                 'UserName': userName,
-                // 'PhoneNumber': userNumber,
+                'PhoneNumber': userNumber,
                 'UserEmail': userEmail,
                 'Password': password,
             }
             return userData;
         }
+    }
+
+    function validPhoneNumber(number){
+        let numberChecking = /^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$/im;
+        return numberChecking.test(number);
     }
 
     function signup(){
