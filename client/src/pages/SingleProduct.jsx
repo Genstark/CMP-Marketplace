@@ -10,11 +10,12 @@ function SingleProduct(){
     const [textareaValue, setTextareaValue] = useState('');
     const [textareaHeight, setTextareaHeight] = useState('auto');
     const [apiData, setApiData] = useState([]);
+    const [imageCollection, setImageCollection] = useState([]);
 
     useEffect(() => {
 
-        const element = document.getElementById('itemDetail'); // Replace with your textarea ID
-        
+        const element = document.getElementById('itemDetail');
+
         if (element) {
             element.style.height = 'auto';
             element.style.height = element.scrollHeight + 'px';
@@ -35,10 +36,14 @@ function SingleProduct(){
 
                 // Update state after data is fetched
                 setApiData([data['data']]);
-                setTextareaValue(data['data'].details)
+                setTextareaValue(data['data'].details);
                 console.log(data);
+
+                setImageCollection([...imageCollection, data['data']['image-1'].data]);
+                setImageCollection([...imageCollection, data['data']['image-2'].data]);
+                setImageCollection([...imageCollection, data['data']['image-3'].data]);
             } 
-            catch (error) {
+            catch(error){
                 console.error('Error fetching data:', error);
             }
         };
@@ -52,8 +57,8 @@ function SingleProduct(){
     };
 
     const imagePosition = {
-        marginLeft: 4, 
-        marginTop: 3, 
+        marginLeft: 4,
+        marginTop: 3,
         marginBottom: 3,
         width: 110
     }
@@ -67,7 +72,7 @@ function SingleProduct(){
     const [search, setSearch] = useState('');
     function userSearch(value){
         setSearch(value);
-        console.log(value)
+        console.log(value);
     }
 
     function finding(){
@@ -84,7 +89,7 @@ function SingleProduct(){
             return false;
         }
         else{
-            return true
+            return true;
         }
     }
 

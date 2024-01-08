@@ -9,6 +9,7 @@ import FindProduct from "./pages/FindProduct.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/SignUp.jsx";
 import AddItem from "./pages/AddItem.jsx";
+import ImageClassification from "./pages/ImageClassification.jsx";
 
 
 function App(){
@@ -40,6 +41,7 @@ function App(){
                     <Route exact path='/login' element={< Login />}></Route>
                     <Route exact path="/signup" element={< Signup />}></Route>
                     <Route exact path="/addItem" element={< AddItem />}></Route>
+                    <Route exact path="/imageClassification" element={< ImageClassification />}></Route>
 			    </Routes>
 
             </Router>

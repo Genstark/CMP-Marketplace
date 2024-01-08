@@ -59,10 +59,6 @@ function CustomDropdown({name}){
         window.location.href = `/profile/${data}/${token}`;
     }
 
-    function addItem(){
-        window.location.href = '/addItem';
-    }
-
     function logoutFunction(){
         sessionStorage.clear();
         window.location.reload();
@@ -76,7 +72,8 @@ function CustomDropdown({name}){
             {isOpen && (
                 <ul className="dropdown-options">
                     <li onClick={profilePage}>Profile</li>
-                    <li onClick={addItem}>Add Item</li>
+                    <li onClick={() => window.location.href = '/addItem'}>Add Item</li>
+                    <li onClick={() => window.location.href = '/imageClassification'}>Image Checker</li>
                     <li onClick={logoutFunction}>Logout</li>
                 </ul>
             )}
