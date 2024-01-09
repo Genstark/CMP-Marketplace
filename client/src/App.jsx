@@ -9,7 +9,7 @@ import FindProduct from "./pages/FindProduct.jsx";
 import Login from "./pages/Login.jsx";
 import Signup from "./pages/SignUp.jsx";
 import AddItem from "./pages/AddItem.jsx";
-import ImageClassification from "./pages/ImageClassification.jsx";
+import ImageClassification from "./pages/Image.jsx";
 
 
 function App(){

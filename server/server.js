@@ -132,18 +132,47 @@ async function getUserDataWithProduct(userId){
     }
 }
 
+async function getUserProfileDataWithoutProduct(userId){
+    const client = new MongoClient(Decrypt(uri));
+
+    try{
+        await client.connect();
+
+        const db = client.db('olx');
+        const collection = db.collection('user_data');
+
+        // const user =  await collection.findOne({ _id: new ObjectId(userId) });
+        return await collection.find({user_id: userId}).toArray();
+    }
+    finally{
+        await client.close();
+    }
+}
+
 app.get('/item/profile/:itemId', (req, res) => {
     const requesId = req.params.itemId;
     console.log(requesId);
     
     getUserDataWithProduct(requesId).then(data => {
-        let userOfUser = data['user_id']
+        let userOfUser = data['user_id'];
         console.log(userOfUser);
-        res.json({
-            message: 'ok',
-            data: data
-        });
 
+        if(data !== null || data !== undefined || data !== ''){
+            res.json({
+                message: 'ok',
+                data: data
+            });
+        }
+        else{
+            getUserProfileDataWithoutProduct(requesId).then(data => {
+                res.json({
+                    message: 'ok',
+                    data: data
+                });
+            }).catch(error => {
+                console.log(error);
+            });
+        }
     }).catch(err => {
         console.log(err);
     });

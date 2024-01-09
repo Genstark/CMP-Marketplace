@@ -71,7 +71,7 @@ function Task(){
                                         <button className="deleteTask" onClick={() => removeItemFunction(object.id)}>Delete</button>
                                     </div>)} */}
 
-                {list.map(object => <NewElement key={object.id} id={object.id} title={object.title} removeItem={removeItemFunction} taskDone={taskDone}></NewElement>)}
+                {list.map(object => <NewElement key={object.id} id={object.id} title={object.title} removeItem={removeItemFunction} taskDone={taskDone} />)}
 
             </div>
         </div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useState, useRef} from "react";
 import '../styling/SingleProduct.css';
 import userImge from '../image/user.png';
 import { Link } from 'react-router-dom';
@@ -10,7 +10,9 @@ function SingleProduct(){
     const [textareaValue, setTextareaValue] = useState('');
     const [textareaHeight, setTextareaHeight] = useState('auto');
     const [apiData, setApiData] = useState([]);
-    const [imageCollection, setImageCollection] = useState([]);
+    const [image1, setImage1] = useState('');
+    const [image2, setImage2] = useState('');
+    const [image3, setImage3] = useState('');
 
     useEffect(() => {
 
@@ -39,9 +41,9 @@ function SingleProduct(){
                 setTextareaValue(data['data'].details);
                 console.log(data);
 
-                setImageCollection([...imageCollection, data['data']['image-1'].data]);
-                setImageCollection([...imageCollection, data['data']['image-2'].data]);
-                setImageCollection([...imageCollection, data['data']['image-3'].data]);
+                setImage1(data['data']['image-1'].data);
+                setImage2(data['data']['image-2'].data);
+                setImage3(data['data']['image-3'].data);
             } 
             catch(error){
                 console.error('Error fetching data:', error);
@@ -79,9 +81,6 @@ function SingleProduct(){
         window.location.href = `/items/search/${search}`;
     }
 
-    function loginPage(){
-        window.location.href = `/login`;
-    }
 
     const showDataOrNot = sessionStorage.getItem('data');
     function renderMainData(){
@@ -93,21 +92,23 @@ function SingleProduct(){
         }
     }
 
+    const imageRef = useRef(null);
+
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={() => window.location.href = `/login`} />
 
             {apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">
                     <button className="backButton">😂</button>
-                    <img src={object['image-1'].data} alt="main item display" className="image" />
+                    <img src={object['image-1'].data} alt="main item display" className="image" ref={imageRef}/>
                     <button className="forwardButton">🤣</button>
                 </div>
 
                 <div className="imageCollection">
-                    <img src={object['image-1'].data} style={imagePosition} alt="image 1" />
-                    <img src={object['image-2'].data} style={imagePosition} alt="image 2" />
-                    <img src={object['image-3'].data} style={imagePosition} alt="image 3" />
+                    <img src={object['image-1'].data} style={imagePosition} alt="image 1" onClick={() => imageRef.current.src = image1} />
+                    <img src={object['image-2'].data} style={imagePosition} alt="image 2" onClick={() => imageRef.current.src = image2} />
+                    <img src={object['image-3'].data} style={imagePosition} alt="image 3" onClick={() => imageRef.current.src = image3} />
                 </div>
 
                 <div className="sellerCard">
@@ -123,7 +124,8 @@ function SingleProduct(){
                 <div className="priceAndOverview">
                     <div className="priceAndAddress">
                         <h2 style={{marginLeft: 4}}>Overview</h2>
-                        <textarea name="product overview" id="overview" rows="8" value={object.overview} className="overviewTextArea" disabled></textarea>
+                        {/* <textarea name="product overview" id="overview" rows="8" value={object.overview} className="overviewTextArea" disabled></textarea> */}
+                        <p style={{marginLeft: 4}}>{object.overview}</p>
                     </div>
                     <div className="overView">
                         <h2 style={{
@@ -144,7 +146,8 @@ function SingleProduct(){
 
                 <div className="productDetial">
                     <h2 style={{marginLeft: 4}}>Details</h2>
-                    <textarea id="itemDetail" className="textDetails" value={textareaValue} onChange={handleChange} style={{ height: textareaHeight }} disabled />
+                    {/* <textarea id="itemDetail" className="textDetails" value={textareaValue} onChange={handleChange} style={{ height: textareaHeight }} disabled /> */}
+                    <p style={{marginLeft: 4}}>{object.details}</p>
                 </div>
             </div>)}
         </>

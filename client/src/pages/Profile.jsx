@@ -29,7 +29,10 @@ function Profile(){
                 setApiData(data['data']);
                 setUserName(data['data'][0]['userName']);
                 setUserNumber(data['data'][0]['phoneNumber']);
-                setUserAddress(data['data'][0]['Address']);
+
+                if(setUserAddress(data['data'][0]['Address'])){
+                    setUserAddress(data['data'][0]['Address']);
+                }
                 console.log(data);
             } 
             catch (error) {
