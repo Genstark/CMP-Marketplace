@@ -64,7 +64,7 @@ function ImageClassification(){
                 border: '1px solid black',
                 margin: 'auto',
                 display: 'flex'
-            }} className="">
+            }} className="main">
 
                 <div style={{
                     backgroundColor: 'red',
