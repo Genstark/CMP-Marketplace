@@ -2,10 +2,10 @@ import React, {useState, useRef, useEffect} from "react";
 import Header from "../component/Header.jsx";
 import * as tf from '@tensorflow/tfjs';
 import sound from '../image/test.mp3';
-import '../styling/Image.css'
+import '../styling/TestingComponent.css'
 
 
-function ImageClassification(){
+function ComponentTesting(){
 
     const [output, setOutput] = useState(null);
 
@@ -79,4 +79,4 @@ function ImageClassification(){
     );
 }
 
-export default ImageClassification;
+export default ComponentTesting;

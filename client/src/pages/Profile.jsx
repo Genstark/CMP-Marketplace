@@ -10,6 +10,7 @@ function Profile(){
     const [userName, setUserName] = useState('');
     const [userNumber, setUserNumber] = useState('');
     const [userAddress, setUserAddress] = useState('');
+    const [status, setStatus] = useState(false);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -29,8 +30,8 @@ function Profile(){
                 setApiData(data['data']);
                 setUserName(data['data'][0]['userName']);
                 setUserNumber(data['data'][0]['phoneNumber']);
-
-                if(setUserAddress(data['data'][0]['Address'])){
+                
+                if(setUserAddress(data['data'][0]['userName'])){
                     setUserAddress(data['data'][0]['Address']);
                 }
                 console.log(data);
@@ -96,7 +97,7 @@ function Profile(){
 
                     <h3 style={{
                         marginLeft: 16
-                    }}>Contact: {renderMainData() ? userNumber : '*********'}</h3>
+                    }}>Contact: {renderMainData() ? userNumber : '**********'}</h3>
                     <hr style={{
                         width: '99%',
                         color: 'black'

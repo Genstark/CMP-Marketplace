@@ -142,7 +142,7 @@ async function getUserProfileDataWithoutProduct(userId){
         const collection = db.collection('user_data');
 
         // const user =  await collection.findOne({ _id: new ObjectId(userId) });
-        return await collection.find({user_id: userId}).toArray();
+        return await collection.find({_id : new ObjectId(userId)}).toArray();
     }
     finally{
         await client.close();
@@ -155,9 +155,9 @@ app.get('/item/profile/:itemId', (req, res) => {
     
     getUserDataWithProduct(requesId).then(data => {
         let userOfUser = data['user_id'];
-        console.log(userOfUser);
+        console.log(data);
 
-        if(data !== null || data !== undefined || data !== ''){
+        if(data.length !== 0){
             res.json({
                 message: 'ok',
                 data: data
@@ -165,6 +165,7 @@ app.get('/item/profile/:itemId', (req, res) => {
         }
         else{
             getUserProfileDataWithoutProduct(requesId).then(data => {
+                console.log(data);
                 res.json({
                     message: 'ok',
                     data: data

@@ -73,7 +73,7 @@ function CustomDropdown({name}){
                 <ul className="dropdown-options">
                     <li onClick={profilePage}>Profile</li>
                     <li onClick={() => window.location.href = '/addItem'}>Add Item</li>
-                    <li onClick={() => window.location.href = '/imageClassification'}>Image Checker</li>
+                    <li onClick={() => window.location.href = '/testingComponent'}>Testing Component</li>
                     <li onClick={logoutFunction}>Logout</li>
                 </ul>
             )}
