@@ -5,6 +5,7 @@ const { MongoClient, ObjectId } = require('mongodb');
 const multer = require('multer');
 const CryptoJS = require("crypto-js");
 const path = require('path');
+require('dotenv').config();
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
