@@ -13,7 +13,7 @@ app.use(express.urlencoded({extended: true}));
 app.use('/public', express.static(path.join(__dirname, 'public'), { 'extensions': ['html', 'js', 'css'] }));
 
 // app.use(cors({
-//     origin: 'http://localhost:5173',
+//     origin: 'https://astounding-peony-2871c7.netlify.app/',
 //     methods: 'GET, PUT, PATCH, DELETE, POST',
 //     credentials: true
 // }));
