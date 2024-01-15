@@ -12,6 +12,8 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/public', express.static(path.join(__dirname, 'public'), { 'extensions': ['html', 'js', 'css'] }));
 
+app.use(express.static('client/dist'));
+
 const corsOptions = [
     {
         origin: 'http://localhost:5173',
@@ -26,7 +28,7 @@ const corsOptions = [
     // Add more configurations if needed
 ];
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 
 // app.use(cors({
@@ -93,11 +95,6 @@ app.get('/items', (req, res) => {
 });
 
 
-app.get('/home', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', '/index.html'));
-});
-
-
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 //when user request for the product page
 
@@ -130,11 +127,6 @@ app.get('/items/:id', (req, res) => {
     }).catch(error => {
         console.log(error);
     });
-});
-
-
-app.get('/home/item/:itemId', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', '/productdetail.html'));
 });
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
@@ -203,11 +195,6 @@ app.get('/item/profile/:itemId', (req, res) => {
     });
 });
 
-
-app.get('/home/user/profile/:username/:userId', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', '/profile.html'));
-});
-
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
 async function addDataMongodb(userdata){
@@ -253,10 +240,6 @@ app.post('/signIn', (req, res) => {
         console.log(error);
     });
 
-});
-
-app.get('/signIn', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', '/signIn.html'));
 });
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
@@ -309,11 +292,6 @@ app.post('/login', (req, res) => {
     }).catch(err => {
         console.log(err);
     });
-});
-
-
-app.get('/login', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', '/login.html'));
 });
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
@@ -391,10 +369,6 @@ app.post('/addProduct', upload.array('files', 3),(req, res) => {
     });
 });
 
-app.get('/addProduct', (req, res) => {
-    res.sendFile(path.join(__dirname, 'public', '/productEntry.html'));
-});
-
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
 async function deleteItem(itemId){
@@ -459,9 +433,12 @@ app.get('/item/search/:query', (req, res) => {
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
-app.get('/home', (req, res) => {
-    console.log(__dirname);
-    res.sendFile(path.join(__dirname, 'olx-page', 'index.html'));
+// app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+// });
+
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client', 'dist/index.html'));
 });
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
