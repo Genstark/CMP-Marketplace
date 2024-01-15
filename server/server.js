@@ -12,18 +12,18 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/public', express.static(path.join(__dirname, 'public'), { 'extensions': ['html', 'js', 'css'] }));
 
-// app.use(cors({
-//     origin: 'http://localhost:5173',
-//     methods: 'GET, PUT, PATCH, DELETE, POST',
-//     credentials: true
-// }));
-
-
 app.use(cors({
-    origin: 'https://cmp-marketplace.netlify.app',
+    origin: 'http://localhost:5173',
     methods: 'GET, PUT, PATCH, DELETE, POST',
     credentials: true
 }));
+
+
+// app.use(cors({
+//     origin: 'https://cmp-marketplace.netlify.app',
+//     methods: 'GET, PUT, PATCH, DELETE, POST',
+//     credentials: true
+// }));
 
 const uri = "U2FsdGVkX19+f6CAlwEFqvnpO5Nz5122QT5AuJpE3FmjJayvf0iusYU4h5fDnBAp8NdbMvX+AEvC6k6J+BzNxI/Zn04BdsC6LWfxbPAFTznSx0GuNbdB/4j65BOHKFJiLKJB+hGvTTj5CshiP6pqPwHXFTBm8r4cEsSDbIbgyu2AnaIuyZfsz+vgCU4jS+mZ";
 
