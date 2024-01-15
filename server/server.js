@@ -12,11 +12,28 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/public', express.static(path.join(__dirname, 'public'), { 'extensions': ['html', 'js', 'css'] }));
 
-app.use(cors({
-    origin: 'http://localhost:5173',
-    methods: 'GET, PUT, PATCH, DELETE, POST',
-    credentials: true
-}));
+const corsOptions = [
+    {
+        origin: 'http://localhost:5173',
+        methods: 'GET, PUT, PATCH, DELETE, POST',
+        credentials: true,
+    },
+    {
+        origin: 'https://cmp-marketplace.netlify.app',
+        methods: 'GET, PUT, PATCH, DELETE, POST',
+        credentials: true,
+    },
+    // Add more configurations if needed
+];
+
+app.use(cors(corsOptions));
+
+
+// app.use(cors({
+//     origin: 'http://localhost:5173',
+//     methods: 'GET, PUT, PATCH, DELETE, POST',
+//     credentials: true
+// }));
 
 
 // app.use(cors({
