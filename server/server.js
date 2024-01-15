@@ -21,7 +21,7 @@ const corsOptions = [
         credentials: true,
     },
     {
-        origin: 'https://cmp-marketplace.netlify.app',
+        origin: 'https://cmpmarketplacebackend.onrender.com',
         methods: 'GET, PUT, PATCH, DELETE, POST',
         credentials: true,
     },
