@@ -26,7 +26,7 @@ function HomePage(){
     console.log(apiData);
 
     function changeLocation(id){
-        window.location.href = `/item/${id}`;
+        window.location.href = `/items/${id}`;
     }
 
     const [search, setSearch] = useState('');
