@@ -167,7 +167,7 @@ async function getUserProfileDataWithoutProduct(userId){
 
 app.get('/item/profile/:itemId', (req, res) => {
     const requesId = req.params.itemId;
-    console.log(requesId);
+    // console.log(requesId);
     
     getUserDataWithProduct(requesId).then(data => {
         let userOfUser = data['user_id'];
@@ -261,7 +261,7 @@ async function loginDataMongodb(useremail){
 
 app.post('/login', (req, res) => {
     const postData = req.body;
-    console.log(postData);
+    // console.log(postData);
 
     loginDataMongodb(postData['email']).then(data => {
         const mongoData = data;
