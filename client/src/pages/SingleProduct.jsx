@@ -3,6 +3,7 @@ import '../styling/SingleProduct.css';
 import userImge from '../image/user.png';
 import { Link } from 'react-router-dom';
 import Header from '../component/Header.jsx';
+import LoadingBar from "../component/Loading.jsx";
 
 
 function SingleProduct(){
@@ -13,6 +14,7 @@ function SingleProduct(){
     const [image1, setImage1] = useState('');
     const [image2, setImage2] = useState('');
     const [image3, setImage3] = useState('');
+    const [status, setStatus] = useState(false);
 
     useEffect(() => {
 
@@ -44,6 +46,7 @@ function SingleProduct(){
                 setImage1(data['data']['image-1'].data);
                 setImage2(data['data']['image-2'].data);
                 setImage3(data['data']['image-3'].data);
+                setStatus(true);
             } 
             catch(error){
                 console.error('Error fetching data:', error);
@@ -98,7 +101,7 @@ function SingleProduct(){
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={() => window.location.href = `/login`} />
 
-            {apiData.map(object => <div className="mainContainer" key={object._id}>
+            {status ? apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">
                     <button className="backButton">😂</button>
                     <img src={object['image-1'].data} alt="main item display" className="image" ref={imageRef}/>
@@ -149,7 +152,7 @@ function SingleProduct(){
                     {/* <textarea id="itemDetail" className="textDetails" value={textareaValue} onChange={handleChange} style={{ height: textareaHeight }} disabled /> */}
                     <p style={{marginLeft: 4}}>{object.details}</p>
                 </div>
-            </div>)}
+            </div>) : <LoadingBar />}
         </>
     );
 }

@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import '../styling/Login.css';
+import { Encryption } from "../functions/Encryption.js";
 
 function Login(){
     const [username, setUsername] = useState("");
@@ -62,8 +63,8 @@ function Login(){
             console.log(data);
 
             if(data.done){
-                sessionStorage.setItem("data", data.data);
-                sessionStorage.setItem('token', data.token);
+                sessionStorage.setItem("data", Encryption(data.data));
+                sessionStorage.setItem('token', Encryption(data.token));
                 window.location.href = '/';
             }
             else{

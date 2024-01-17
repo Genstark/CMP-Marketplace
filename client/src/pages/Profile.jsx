@@ -2,6 +2,7 @@ import React, {useState, useEffect} from "react";
 import userImge from '../image/user.png';
 import '../styling/Profile.css';
 import Header from '../component/Header.jsx';
+import LoadingBar from "../component/Loading.jsx";
 
 
 function Profile(){
@@ -34,6 +35,8 @@ function Profile(){
                 if(setUserAddress(data['data'][0]['userName'])){
                     setUserAddress(data['data'][0]['Address']);
                 }
+
+                setStatus(true);
                 console.log(data);
             } 
             catch (error) {
@@ -79,7 +82,7 @@ function Profile(){
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
 
-            <div className="maincontainer">
+            {status ? <div className="maincontainer">
                 <div className="profileInfo">
                     <img src={userImge} alt="user image" className="userimage" />
                     <hr style={{
@@ -116,7 +119,7 @@ function Profile(){
                         <p className="itemLocation">{object.state}</p>
                     </div>)}
                 </div>
-            </div>
+            </div> : <LoadingBar />}
 
         </>
     );

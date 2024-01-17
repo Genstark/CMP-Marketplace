@@ -21,14 +21,14 @@ const corsOptions = [
         credentials: true,
     },
     {
-        origin: 'https://cmpmarketplacebackend.onrender.com',
+        origin: 'https://cmpmarketplacebackend.onrender.com/',
         methods: 'GET, PUT, PATCH, DELETE, POST',
         credentials: true,
     },
     // Add more configurations if needed
 ];
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 
 // app.use(cors({
@@ -46,7 +46,7 @@ const corsOptions = [
 
 const uri = "U2FsdGVkX19+f6CAlwEFqvnpO5Nz5122QT5AuJpE3FmjJayvf0iusYU4h5fDnBAp8NdbMvX+AEvC6k6J+BzNxI/Zn04BdsC6LWfxbPAFTznSx0GuNbdB/4j65BOHKFJiLKJB+hGvTTj5CshiP6pqPwHXFTBm8r4cEsSDbIbgyu2AnaIuyZfsz+vgCU4jS+mZ";
 
-const PORT = process.env.PORT;
+const PORT = process.env.PORT || 2000;
 
 
 
@@ -341,9 +341,10 @@ const upload = multer({storage: storage});
 app.post('/addProduct', upload.array('files', 3),(req, res) => {
 
     const userData = req.body;
-    const userId = req.body.token;
-    // const user = Decrypt(req.body.data);
-    const user = req.body.data;
+    // const userId = req.body.token;
+    const userId = Decrypt(req.body.token);
+    const user = Decrypt(req.body.data);
+    // const user = req.body.data;
 
     let imageCollection = [];
 

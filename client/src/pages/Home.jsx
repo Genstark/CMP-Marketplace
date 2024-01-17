@@ -1,10 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../styling/Home.css';
 import Header from '../component/Header.jsx';
+import LoadingBar from "../component/Loading.jsx";
 
 function HomePage(){
 
     const [apiData, setApiData] = useState([]);
+    const [status, setStatus] = useState(false);
 
     useEffect(() => {
 
@@ -17,6 +19,7 @@ function HomePage(){
             return res.json();
         }).then(data => {
             setApiData(data['data']);
+            setStatus(true);
         }).catch(error => {
             console.log("Error in Fetching Data");
         });
@@ -51,7 +54,7 @@ function HomePage(){
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} logout={logout} />
             
-            <div className="itemCard">
+            {status ? <div className="itemCard">
                 {/* <ul>
                     {apiData.map((object, index) => <li key={object._id}>{object.userName} {object.phoneNumber} {object.title} {object.Address}<br />
                                                 <img src={object['image-1'].data} style={{width: 100, height: 100}} />
@@ -66,7 +69,7 @@ function HomePage(){
                     <p className="itemOverView">{object.overview}</p>
                     <p className="itemLocation">{object.state}</p>
                 </div>)}
-            </div>
+            </div> : <LoadingBar />}
         </>
     );
 }

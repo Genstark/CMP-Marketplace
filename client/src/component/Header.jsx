@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import '../styling/Header.css';
 import userImge from '../image/user.png';
 import { Link } from "react-router-dom";
+import { Decrypt } from "../functions/Encryption.js";
 
 
 function Logindropdown({logoutFunction, username}){
@@ -56,7 +57,7 @@ function CustomDropdown({name}){
     function profilePage(){
         const data = sessionStorage.getItem('data');
         const token = sessionStorage.getItem('token');
-        window.location.href = `/profile/${data}/${token}`;
+        window.location.href = `/profile/${Decrypt(data)}/${Decrypt(token)}`;
     }
 
     function logoutFunction(){
@@ -91,7 +92,7 @@ function Header({search, clickSearch, toLoginPage, logout}){
         function userLogin(){
             const data = sessionStorage.getItem('data');
             if(data !== null){
-                setLoginOrNot(data);
+                setLoginOrNot(Decrypt(data));
                 setLoginStatus(true);
             }
             else{

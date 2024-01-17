@@ -3,11 +3,13 @@ import '../styling/Home.css';
 import userImge from '../image/user.png';
 import { Link } from "react-router-dom";
 import Header from '../component/Header.jsx';
+import LoadingBar from "../component/Loading.jsx";
 
 
 function FindProduct(){
 
     const [apiData, setApiData] = useState([]);
+    const [status, setStatus] = useState(false);
 
     useEffect(() => {
         const currentUrl = window.location.href;
@@ -22,6 +24,7 @@ function FindProduct(){
         }).then(data => {
             console.log(data);
             setApiData(data['data']);
+            setStatus(true);
         }).catch(error => {
             console.log('Error');
         });
@@ -69,14 +72,14 @@ function FindProduct(){
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
 
-            <div className="itemCard">
+            {status ? <div className="itemCard">
                 {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>
                             <img src={object['image-1'].data} alt="image testing" className="itemImage" />
                             <h1 className="itemName">{object.title}</h1>
                             <p className="itemOverView">{object.overview}</p>
                             <p className="itemLocation">{object.state}</p>
                 </div>)}
-            </div>
+            </div> : <LoadingBar />}
         </>
     );
 }
