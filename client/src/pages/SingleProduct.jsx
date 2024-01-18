@@ -97,6 +97,9 @@ function SingleProduct(){
 
     const imageRef = useRef(null);
 
+    const validImageTypes = ['png', 'jpeg', 'jpg'];
+    const isValidImageType = validImageTypes.includes(validImageTypes);
+
     return(
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={() => window.location.href = `/login`} />
@@ -104,14 +107,14 @@ function SingleProduct(){
             {status ? apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">
                     <button className="backButton">😂</button>
-                    <img src={object['image-1'].data} alt="main item display" className="image" ref={imageRef}/>
+                    <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} alt="main item display" className="image" ref={imageRef}/>
                     <button className="forwardButton">🤣</button>
                 </div>
 
                 <div className="imageCollection">
-                    <img src={object['image-1'].data} style={imagePosition} alt="image 1" onClick={() => imageRef.current.src = image1} />
-                    <img src={object['image-2'].data} style={imagePosition} alt="image 2" onClick={() => imageRef.current.src = image2} />
-                    <img src={object['image-3'].data} style={imagePosition} alt="image 3" onClick={() => imageRef.current.src = image3} />
+                    <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} style={imagePosition} alt="image 1" onClick={() => imageRef.current.src = image1} />
+                    <img src={object['image-2'].data || `data:image/${isValidImageType};base64,${object['image-2'].data}`} style={imagePosition} alt="image 2" onClick={() => imageRef.current.src = image2} />
+                    <img src={object['image-3'].data || `data:image/${isValidImageType};base64,${object['image-3'].data}`} style={imagePosition} alt="image 3" onClick={() => imageRef.current.src = image3} />
                 </div>
 
                 <div className="sellerCard">

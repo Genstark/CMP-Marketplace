@@ -7,18 +7,25 @@ function AddItem(){
     const [textareaHeight, setTextareaHeight] = useState('auto');
     const detailsTextareaRef = useRef(null);
     const imageInputRef = useRef(null);
+    const [status, setStatus] = useState(false);
 
     const [button, setButton] = useState('Add Item');
 
     useEffect(() => {
         const element = detailsTextareaRef.current;
         
-        if (element){
-            element.style.height = 'auto';
-            element.style.height = element.scrollHeight + 'px';
-            setTextareaHeight(element.style.height);
+        if(sessionStorage.getItem('data')){
+            setStatus(true);
+            if (element){
+                element.style.height = 'auto';
+                element.style.height = element.scrollHeight + 'px';
+                setTextareaHeight(element.style.height);
+            }
         }
-        
+        else{
+            setStatus(false);
+            window.location.href = '/login';
+        }
     }, [textareaValue]);
 
     function Homepage(){
@@ -150,7 +157,7 @@ function AddItem(){
                 <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={Homepage}>Compro Marketplace</h3>
             </div>
 
-            <div className="itemAdd">
+            {status ? <div className="itemAdd">
                 <label htmlFor="title" className="labelName">Title:</label><br />
                 <input type="text" id="title" name="name" className="inputData" placeholder="enter your full name" onChange={(e) => setTitle(e.target.value)} /><br />
 
@@ -194,7 +201,7 @@ function AddItem(){
 
                 <button className="addProduct" onClick={addProduct}>{button}</button>
 
-            </div>
+            </div> : ''}
         </>
     );
 }

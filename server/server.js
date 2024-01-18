@@ -28,7 +28,7 @@ const corsOptions = [
     // Add more configurations if needed
 ];
 
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 
 // app.use(cors({
