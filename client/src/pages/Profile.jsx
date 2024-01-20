@@ -19,7 +19,7 @@ function Profile(){
                 const currentUrl = window.location.href;
                 const urlFilter = currentUrl.split('/').pop();
                 console.log(urlFilter);
-                const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/profile/${urlFilter}`;
+                const apiUrl = `http://localhost:2000/item/profile/${urlFilter}`;
                 const options = {
                     method: 'GET',
                 };

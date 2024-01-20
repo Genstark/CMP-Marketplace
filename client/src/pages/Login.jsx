@@ -48,7 +48,7 @@ function Login(){
     function login(){
         const Data = checkData();
         
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/login';
+        const apiUrl = 'http://localhost:2000/login';
         const options = {
             method: 'POST',
             headers: {'Content-Type':'application/json'},

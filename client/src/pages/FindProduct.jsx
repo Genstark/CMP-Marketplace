@@ -14,7 +14,7 @@ function FindProduct(){
     useEffect(() => {
         const currentUrl = window.location.href;
         const urlFilter = currentUrl.split('/').pop();
-        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/search/${urlFilter}`;
+        const apiUrl = `http://localhost:2000/item/search/${urlFilter}`;
         const options = {
             method: 'GET'
         }
@@ -45,7 +45,7 @@ function FindProduct(){
         
         const currentUrl = window.location.href;
         const urlFilter = currentUrl.split('/').pop();
-        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/search/${urlFilter}`;
+        const apiUrl = `http://localhost:2000/item/search/${urlFilter}`;
         const options = {
             method: 'GET'
         }

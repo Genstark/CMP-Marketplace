@@ -1,6 +1,5 @@
 import React, {useState, useRef, useEffect} from "react";
 import Header from "../component/Header.jsx";
-import * as tf from '@tensorflow/tfjs';
 import '../styling/TestingComponent.css'
 
 
@@ -12,11 +11,32 @@ const Chatbox = () => {
         if(userInput.trim() === ''){
             return;
         }
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: userInput, sender: 'user' },
-            { text: 'Hello! I am a bot.', sender: 'bot' }
-        ]);
+
+        const apiUrl = 'http://localhost:2000/chatbot';
+        const options = {
+            method: 'POST',  // Corrected property name
+            headers: {
+                'Content-type': 'application/json; charset=UTF-8'
+            },
+            body: JSON.stringify({"userQuery": userInput})
+        }
+
+        setMessages((prevMessage) => [...prevMessage, {text: userInput, sender: 'user'}]);
+
+        fetch(apiUrl, options).then(res => {
+            return res.json();
+        }).then(data => {
+            console.log(data);
+            setMessages((prevMessage) => [...prevMessage, {text: data['data'], sender: 'bot'}]);
+        }).catch(error => {
+            console.log('model is not working');
+        });
+
+        // setMessages((prevMessages) => [
+        //     ...prevMessages,
+        //     { text: userInput, sender: 'user' },
+        //     { text: 'Hello! I am a bot.', sender: 'bot' }
+        // ]);
   
         setUserInput('');
     };
@@ -49,26 +69,6 @@ function ComponentTesting(){
 
     const [output, setOutput] = useState(null);
 
-    useEffect(() => {
-        // const data = tf.randomNormal([100, 1]);
-        // const labels = tf.randomUniform([100, 1], 0, 2).round();
-
-        // const model = tf.sequential();
-        // model.add(tf.layers.dense({ units: 1, inputShape: [1], activation: 'sigmoid' }));
-
-        // model.compile({ optimizer: 'Adam', loss: 'binaryCrossentropy', metrics: ['accuracy'] });
-
-        // model.fit(data, labels, { epochs: 10 }).then((history) => {
-        //     console.log('Training complete:', history);
-
-        //     const newData = tf.randomNormal([1, 1]);
-        //     const prediction = model.predict(newData);
-
-        //     setOutput(prediction.dataSync()[0]);
-        // });
-
-    }, []);
-
     const [mouseX, setMouseX] = useState('mouse is out');
     const mouseRef = useRef(null);
 
@@ -82,7 +82,7 @@ function ComponentTesting(){
                 <p>Output: {output !== null ? output.toFixed(4) : 'Loading...'}</p>
             </div>
 
-            <div style={{
+            {/* <div style={{
                 position: 'relative',
                 width: '50%', 
                 height: '200px',
@@ -99,9 +99,9 @@ function ComponentTesting(){
                 }} className="box1">1</div>
 
                 <div className="box2">2</div>
-            </div>
+            </div> */}
 
-            {/* <Chatbox /> */}
+            <Chatbox />
         </>
     );
 }
