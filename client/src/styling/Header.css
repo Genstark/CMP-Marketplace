@@ -204,7 +204,7 @@
 
     .itemCard{
         width: 92%;
-        border: 2px solid black;
+        /* border: 2px solid black; */
         height: fit-content;
         margin: auto;
         margin-top: 5px;

@@ -10,7 +10,7 @@ function HomePage(){
 
     useEffect(() => {
 
-        const apiUrl = 'http://localhost:2000/items';
+        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/items';
         const options = {
             method: 'GET'
         }
@@ -72,7 +72,25 @@ function HomePage(){
                     <h1 className="itemName">{object.title}</h1>
                     <p className="itemOverView">{object.overview}</p>
                     <p className="itemLocation">{object.state}</p>
+                    
                 </div>)}
+
+
+                {/* 2nd option*/}
+
+
+                {/* {apiData.map((object) => <div className="cardproduct" key={object._id} onClick={() => changeLocation(object._id)}>
+                
+                    <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} alt="Avatar"/>
+                    <div class="container">
+                        <h1 className="">{object.title}</h1>
+                        <p className="">{object.overview}</p>
+                        <p className="">{object.state}</p>
+                    </div>
+                </div>)} */}
+
+
+
             </div> : <LoadingBar />}
         </>
     );

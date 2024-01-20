@@ -1,13 +1,80 @@
+
+/*-----------------------------------------*/
+
+
+/* .cardproduct {
+    transition: 0.3s;
+    width: 31%;
+    display: inline-block;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+.cardproduct:hover {
+    box-shadow: 0 0px 16px 0 rgba(0,0,0,0.2);
+}
+
+.container {
+    padding: 2px 16px;
+    display: block;
+}
+
+.cardproduct img{
+    width:100%;
+    height: 250px;
+}
+
 .itemCard{
-    width: 80%;
-    /* border: 1px solid black; */
-    margin: auto;
-    margin-top: 3px;
+    width: 100%;
+    margin-top:5px;
+    padding: 0px 0px;
     height: fit-content;
 }
 
 .item{
-    width: 98%;
+    width: 240px;
+    margin: auto;
+    height: 250px;
+    overflow: auto;
+    margin-top: 3px;
+    margin-bottom: 3px;
+    border-radius: 10px;
+    cursor: pointer;
+    overflow: hidden;
+}
+
+
+
+@media screen and (min-width: 320px) and (max-width: 576px) {
+
+
+.cardproduct {
+    width:100%;
+    margin-left: 0px;
+    margin-right: 0px;
+    }
+
+}  
+
+@media screen and (min-width: 577px) and (max-width: 786px) {
+.cardproduct {
+    width:45%;
+    }
+} */
+
+
+/*-----------------------------------------*/
+
+.itemCard{
+    width: 100%;
+    margin-top:5px;
+    height: fit-content;
+}
+
+.item{
+    width: 80%;
     border: 2px solid black;
     margin: auto;
     height: 250px;
@@ -132,7 +199,7 @@
 
     .itemCard{
         width: 92%;
-        border: 2px solid black;
+        /* border: 2px solid black; */
         height: fit-content;
         margin: auto;
         margin-top: 5px;
@@ -147,4 +214,6 @@
         margin-top: 3px;
         margin-bottom: 3px;
     }
+
+    
 }
