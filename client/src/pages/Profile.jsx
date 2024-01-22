@@ -125,8 +125,8 @@ function Profile(){
                 </div>
 
                 <div className="productListings">
-                    {apiData.map((object) => <div style={itemCard} className="" key={object._id} onClick={() => changeLocation(object._id)}>
-                        <img src={object['image-1'].data} alt="image testing" className="itemImage" />
+                    {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>
+                        <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} alt="image testing" className="itemImage" />
                         <h1 className="itemName">{object.title}</h1>
                         <p className="itemOverView">{object.overview}</p>
                         <p className="itemLocation">{object.state}</p>
