@@ -1,6 +1,6 @@
 import React, {useState, useRef, useEffect} from "react";
 import Header from "../component/Header.jsx";
-import '../styling/TestingComponent.css'
+import '../styling/TestingComponent.css';
 
 
 const Chatbox = () => {
@@ -14,7 +14,7 @@ const Chatbox = () => {
 
         const apiUrl = 'https://cmpmarketplacebackend.onrender.com/chatbot';
         const options = {
-            method: 'POST',  // Corrected property name
+            method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             },
@@ -32,11 +32,13 @@ const Chatbox = () => {
             console.log('model is not working');
         });
 
-        // setMessages((prevMessages) => [
-        //     ...prevMessages,
-        //     { text: userInput, sender: 'user' },
-        //     { text: 'Hello! I am a bot.', sender: 'bot' }
-        // ]);
+        setMessages((prevMessages) => [
+            ...prevMessages,
+            { text: userInput, sender: 'user' },
+            { text: 'Hello! I am a bot.', sender: 'bot' }
+        ]);
+
+        setMessages((prevMessage) => [...prevMessage, {text: getResponse(userInput), sender: 'bot'}]);
   
         setUserInput('');
     };

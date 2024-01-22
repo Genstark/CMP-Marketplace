@@ -5,7 +5,7 @@ const { MongoClient, ObjectId } = require('mongodb');
 const multer = require('multer');
 const CryptoJS = require("crypto-js");
 const path = require('path');
-// const chatbot = require('./chat_model/chatBot.js')
+// const chatbot = require('./chat_model/chatBot.js');
 require('dotenv').config();
 
 app.use(express.json());
@@ -32,11 +32,11 @@ const corsOptions = [
 // app.use(cors(corsOptions));
 
 
-// app.use(cors({
-//     origin: 'http://localhost:5173',
-//     methods: 'GET, PUT, PATCH, DELETE, POST',
-//     credentials: true
-// }));
+app.use(cors({
+    origin: 'http://localhost:5173',
+    methods: 'GET, PUT, PATCH, DELETE, POST',
+    credentials: true
+}));
 
 
 // app.use(cors({
