@@ -78,6 +78,19 @@ function Profile(){
         }
     }
 
+    const itemCard = {
+        height: 210,
+        margiTop: 0,
+        border: '1px solid black',
+        marginLeft: 8,
+        marginRight: 0,
+        width: '100%',
+        marginBottom: 3,
+        borderRadius: 10,
+        cursor: 'pointer',
+        overflow: 'hidden'
+    };
+
     return(
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
@@ -112,7 +125,7 @@ function Profile(){
                 </div>
 
                 <div className="productListings">
-                    {apiData.map((object) => <div style={{height: 210, marginTop: 0, border: '1px solid black'}} className="item" key={object._id} onClick={() => changeLocation(object._id)}>
+                    {apiData.map((object) => <div style={itemCard} className="" key={object._id} onClick={() => changeLocation(object._id)}>
                         <img src={object['image-1'].data} alt="image testing" className="itemImage" />
                         <h1 className="itemName">{object.title}</h1>
                         <p className="itemOverView">{object.overview}</p>
