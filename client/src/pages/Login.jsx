@@ -21,7 +21,6 @@ function Login(){
 
 
     function checkData(){
-        // check if username and password are not empty
         if(validateEmail(username) === false){
             alert('Please enter a valid email address');
             return;
