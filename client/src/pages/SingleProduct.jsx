@@ -62,10 +62,10 @@ function SingleProduct(){
     };
 
     const imagePosition = {
-        marginLeft: 4,
-        marginTop: 3,
-        marginBottom: 3,
-        width: 110
+        marginLeft: 2,
+        marginTop: 2,
+        marginBottom: 2,
+        width: 102
     }
 
     console.log(apiData);
