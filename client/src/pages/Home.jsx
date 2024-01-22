@@ -72,7 +72,6 @@ function HomePage(){
                     <h1 className="itemName">{object.title}</h1>
                     <p className="itemOverView">{object.overview}</p>
                     <p className="itemLocation">{object.state}</p>
-                    
                 </div>)}
 
 
