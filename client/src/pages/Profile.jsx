@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, {useState, useEffect, useRef} from "react";
 import userImge from '../image/user.png';
 import '../styling/Profile.css';
 import Header from '../component/Header.jsx';
@@ -91,6 +91,28 @@ function Profile(){
         overflow: 'hidden'
     };
 
+    const [deleteButtonRef, setDeleteButtonRef] = useState('Delete');
+
+    const handleDeleteButtonClick = (e, objectId) => {
+        e.stopPropagation();
+        console.log(`Delete button clicked for object with ID: ${objectId}`);
+        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/delete/${objectId}`;
+        const options = {
+            method: "DELETE"
+        }
+
+        // setDeleteButtonRef('Wait...');
+        // fetch(apiUrl, options).then(res => {
+        //     return res.json();
+        // }).then(data => {
+        //     console.log(data);
+        // }).catch(error => {
+        //     console.log(error);
+        // });
+        
+        setApiData(apiData.filter(data => data._id !== objectId));
+    };      
+
     return(
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
@@ -125,11 +147,12 @@ function Profile(){
                 </div>
 
                 <div className="productListings">
-                    {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>
+                    {apiData.map((object) => <div className="itemList" key={object._id} onClick={() => changeLocation(object._id)}>
                         <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} style={{borderBottomLeftRadius: 0}} alt="image testing" className="itemImage" />
                         <h1 className="itemName">{object.title}</h1>
                         <p className="itemOverView">{object.overview}</p>
                         <p className="itemLocation">{object.state}</p>
+                        <button className="deleteButton" onClick={(e) => handleDeleteButtonClick(e, object._id)}>{deleteButtonRef}</button>
                     </div>)}
                 </div>
             </div> : <LoadingBar />}

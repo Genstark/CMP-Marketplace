@@ -97,59 +97,94 @@ function AddItem(){
         return numberChecking.test(number);
     }
 
+    const [imagecollection, setImagecollection] = useState([]);
+    
+    async function imageConvertUrl(){
+        const imgdata = new FormData();
 
-    function addProduct(event){
-        event.preventDefault();
-        //get form data and validate it
-        const data = checkProductInput();
-        const formData = new FormData();
+        for(let i=0; i < imageInputRef.current.files.length; i++){
+            imgdata.append('file', imageInputRef.current.files[i]);
 
-        formData.append('token', sessionStorage.getItem('token'));
-        formData.append('data', sessionStorage.getItem('data'));
-        formData.append('title', data['title']);
-        formData.append('category', data['category']);
-        formData.append('address', data['address']);
-        formData.append('state', data['state']);
-        formData.append('phonenumber', data['phonenumber']);
-        formData.append('price', data['price']);
-        formData.append('files', imageInputRef.current.files[0]);
-        formData.append('files', imageInputRef.current.files[1]);
-        formData.append('files', imageInputRef.current.files[2]);
-        formData.append('overview', data['overview']);
-        formData.append('details', data['details']);
-        formData.append('date', data['date']);
-
-
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/addProduct';
-        const options = {
-            method: 'POST',
-            body: formData
-        }
-
-        try{
-            setButton('Wait...')
-            fetch(apiUrl, options).then(res => {
+            const url = 'https://upload-image-and-return-url-by-thichthicodeteam.p.rapidapi.com/api/upload-image';
+            const options1 = {
+                method: 'POST',
+                headers: {
+                    Accept: '*/*',
+                    'X-RapidAPI-Key': '55cfd3b5e1msh42db4a25dc6d649p1e5846jsnd7f392ecde15',
+                    'X-RapidAPI-Host': 'upload-image-and-return-url-by-thichthicodeteam.p.rapidapi.com'
+                },
+                body: imgdata
+            };
+            await fetch(url, options1).then(res => {
                 return res.json();
             }).then(data => {
                 console.log(data);
-                setTitle('');
-                setCategory('');
-                setAddress('');
-                setState('');
-                setNumber('');
-                setPrice('');
-                setOverview('');
-                setDetails('');
-                setButton('Add Item');
+                setImagecollection((prevApiData) => [...prevApiData, data]);
             }).catch(error => {
                 console.log(error);
             });
         }
-        catch{
-            alert("Error in network while adding product");
-        }
+    }
+    
+    
+    function addProduct(event){
+        event.preventDefault();
+
+        imageConvertUrl().then(res => {
+            
+            const data = checkProductInput();
+            const formData = new FormData();
+    
+            formData.append('token', sessionStorage.getItem('token'));
+            formData.append('data', sessionStorage.getItem('data'));
+            formData.append('title', data['title']);
+            formData.append('category', data['category']);
+            formData.append('address', data['address']);
+            formData.append('state', data['state']);
+            formData.append('phonenumber', data['phonenumber']);
+            formData.append('price', data['price']);
+            formData.append('files', imagecollection['link'][0]);
+            formData.append('files', imagecollection['link'][1]);
+            formData.append('files', imagecollection['link'][2]);
+            formData.append('overview', data['overview']);
+            formData.append('details', data['details']);
+            formData.append('date', data['date']);
+    
+            
+            const apiUrl = 'https://cmpmarketplacebackend.onrender.com/addProduct';
+            const options = {
+                method: 'POST',
+                body: formData
+            }
+
+            try{
+                setButton('Wait...');
+                fetch(apiUrl, options).then(res => {
+                    return res.json();
+                }).then(data => {
+                    console.log(data);
+                    setTitle('');
+                    setCategory('');
+                    setAddress('');
+                    setState('');
+                    setNumber('');
+                    setPrice('');
+                    setOverview('');
+                    setDetails('');
+                    setButton('Add Item');
+                }).catch(error => {
+                    console.log(error);
+                });
+            }
+            catch{
+                alert("Error in network while adding product");
+            }
+
+        });
     }
 
+
+    console.log(imagecollection);
 
     return(
         <>
@@ -159,7 +194,7 @@ function AddItem(){
 
             {status ? <div className="itemAdd">
                 <label htmlFor="title" className="labelName">Title:</label><br />
-                <input type="text" id="title" name="name" className="inputData" placeholder="enter your full name" onChange={(e) => setTitle(e.target.value)} /><br />
+                <input type="text" id="title" name="name" className="inputData" placeholder="enter your full name" onChange={(e) => setTitle(e.target.value)} value={title} /><br />
 
                 <label htmlFor="category" className="labelName">Category:</label><br />
                 <select id="category" name="category" className="categoryDropdown" onChange={(e) => setCategory(e.target.value)}>
@@ -169,10 +204,10 @@ function AddItem(){
                 </select><br />
 
                 <label htmlFor="address" className="labelName">Address:</label><br />
-                <input type="text" id="address" name="address" placeholder="Street Address" className="inputData" onChange={(e) => setAddress(e.target.value)} /><br />
+                <input type="text" id="address" name="address" placeholder="Street Address" className="inputData" onChange={(e) => setAddress(e.target.value)} value={address} /><br />
 
                 <label htmlFor="state" className="labelName">State:</label><br />
-                <input type="text" id="state" name="state" placeholder="enter your state" className="inputData" onChange={(e) => setState(e.target.value)} /><br />
+                <input type="text" id="state" name="state" placeholder="enter your state" className="inputData" onChange={(e) => setState(e.target.value)}  /><br />
 
                 <label htmlFor="number" className="labelName">Number:</label><br />
                 <input type="text" id="number" name="number" placeholder="enter your mobile number" className="inputData" onChange={(e) => setNumber(e.target.value)} /><br />
@@ -181,7 +216,7 @@ function AddItem(){
                 <input type="number" id="price" name="price" placeholder="enter price of product" className="inputData" min={100} onChange={(e) => setPrice(e.target.value)} /><br />
 
                 <label htmlFor="images" className="labelName">Images:</label>
-                <input type="file" accept=".jpg,.jpeg,.png" multiple id="images" ref={imageInputRef} style={{marginLeft: 10, marginBottom: 13}} onChange={(e) => setImage(e.target.value)} /><br />
+                <input type="file" accept=".jpg,.jpeg,.png" multiple id="images" ref={imageInputRef} className="inputImageProduct" style={{marginLeft: 10, marginBottom: 13, border: 'none'}} /><br />
 
                 <label htmlFor="overview" className="labelName">Overview:</label><br />
                 <textarea name="overview" id="overview" className="inputData" style={{resize: 'none', height: 150, fontSize: 15, paddingTop: 4, overflowY: 'hidden'}} onChange={(e) => setOverview(e.target.value)} /><br />

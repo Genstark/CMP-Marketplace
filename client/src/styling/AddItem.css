@@ -68,4 +68,13 @@
     .itemAdd{
         width: 98%;
     }
+
+    .inputImageProduct{
+        width: 68%;
+        margin-left: 0;
+    }
+
+    .categoryDropdown{
+        width: 100%;
+    }
 }

@@ -342,6 +342,7 @@ const upload = multer({storage: storage});
 app.post('/addProduct', upload.array('files', 3),(req, res) => {
 
     const userData = req.body;
+    // console.log(userData);
     // const userId = req.body.token;
     const userId = Decrypt(req.body.token);
     const user = Decrypt(req.body.data);
@@ -388,7 +389,7 @@ async function deleteItem(itemId){
     }
 }
 
-app.delete('/item/:itemId', (req, res) => {
+app.delete('/item/delete/:itemId', (req, res) => {
     const deleterequest = req.params.itemId;
 
     deleteItem(deleterequest).then(data => {
