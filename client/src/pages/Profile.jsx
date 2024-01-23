@@ -31,10 +31,10 @@ function Profile(){
                 setApiData(data['data']);
                 setUserName(data['data'][0]['userName']);
                 setUserNumber(data['data'][0]['phoneNumber']);
+                setUserAddress(data['data'][0]['Address']);
                 
-                if(setUserAddress(data['data'][0]['userName'])){
-                    setUserAddress(data['data'][0]['Address']);
-                }
+                // if(setUserAddress(data['data'][0]['userName'])){
+                // }
 
                 setStatus(true);
                 console.log(data);
