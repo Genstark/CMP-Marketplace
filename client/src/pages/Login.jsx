@@ -66,7 +66,7 @@ function Login(){
                 sessionStorage.setItem('token', Encryption(data.token));
                 // window.location.href = '/';
                 history.back();
-                // window.location.reload();
+                window.location.reload();
             }
             else{
                 setUserlogin('Login');
