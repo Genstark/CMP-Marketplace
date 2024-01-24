@@ -1,83 +1,100 @@
-const bodyParser = require('body-parser');
-const tf = require('@tensorflow/tfjs-node');
+global.fetch = require('node-fetch');
+const tf = require('@tensorflow/tfjs');
 const fs = require('fs');
+const natural = require('natural');
+const path = require('path');
 
-const app = express();
+const WordNet = new natural.WordNet();
 
-app.use(bodyParser.json());
+async function loadModel() {
+    const modelPath = path.resolve(__dirname, 'model.json');
+    const model = await tf.loadLayersModel(`file://${modelPath}`);
+    return model;
+}
 
-const loadModel = async () => {
-    try {
-        const loadedModel = await tf.loadLayersModel('model.json');
-        return loadedModel;
-    } catch (error) {
-        console.error('Error loading model:', error);
-        throw error;
-    }
-};
+async function initialize() {
+    const model = await loadModel();
+    const words = JSON.parse(fs.readFileSync('./words.json')); // Corrected readFileSync
+    const classes = JSON.parse(fs.readFileSync('./classes.json')); // Corrected readFileSync
+    const intents = JSON.parse(fs.readFileSync('./intents.json')); // Corrected readFileSync
 
-const getModel = async () => {
-    try {
-        return await loadModel();
-    } catch (error) {
-        console.error('Error getting model:', error);
-        throw error;
-    }
-};
+    return { model, words, classes, intents };
+}
 
-const model = getModel();
+function cleanUpSentence(sentence) {
+    const sentenceWords = natural.word_tokenize(sentence); // Corrected function call
+    const lemmatizedWords = sentenceWords.map(word => WordNet.lemmatize(word.toLowerCase()));
+    return lemmatizedWords;
+}
 
-const words = JSON.parse(fs.readFileSync('words.json')); // Adjust the path accordingly
-const classes = JSON.parse(fs.readFileSync('classes.json')); // Adjust the path accordingly
-const intents = JSON.parse(fs.readFileSync('intents.json')); // Adjust the path accordingly
-
-const lemmatizer = (word) => word.toLowerCase();
-
-const cleanUpSentence = (sentence) => {
-    const sentenceWords = sentence.split(' ').map(lemmatizer);
-    return sentenceWords;
-};
-
-const bow = (sentence, words) => {
+function bow(sentence, words, showDetails = true) {
     const sentenceWords = cleanUpSentence(sentence);
-    const bag = Array(words.length).fill(0);
+    const bag = new Array(words.length).fill(0);
 
-    sentenceWords.forEach((word) => {
-        const index = words.indexOf(word);
+    for (const s of sentenceWords) {
+        const index = words.indexOf(s);
         if (index !== -1) {
-        bag[index] = 1;
+            bag[index] = 1;
+            if (showDetails) {
+                console.log(`found in bag: ${s}`);
+            }
         }
-    });
+    }
 
     return bag;
-};
+}
 
-const predictClass = (sentence) => {
-    const p = bow(sentence, words);
-    const res = model.predict(tf.tensor2d([p])).dataSync();
-    const ERROR_THRESHOLD = 0.25;
-    const results = res
-        .map((probability, index) => ({ index, probability }))
-        .filter(({ probability }) => probability > ERROR_THRESHOLD)
-        .sort((a, b) => b.probability - a.probability);
+function predictClass(sentence, model, words) {
+    const p = bow(sentence, words, false);
+    const res = model.predict(tf.tensor2d([p])); // Corrected tf.tensor2d
+    const predictions = Array.from(res.dataSync());
+    const errorThreshold = 0.25;
 
-        return results.map(({ index, probability }) => ({
-            intent: classes[index],
-            probability: probability.toString(),
-        }));
-};
+    const results = predictions
+        .map((value, index) => [index, value])
+        .filter(([index, value]) => value > errorThreshold);
 
-const getResponse = (ints) => {
+    results.sort((a, b) => b[1] - a[1]);
+
+    const returnList = results.map(result => ({
+        intent: classes[result[0]],
+        probability: result[1].toString()
+    }));
+
+    return returnList;
+}
+
+function getResponse(ints, intentsJson) {
     const tag = ints[0].intent;
-    const list_of_intents = intents.intents;
+    const list_of_intents = intentsJson.intents;
 
     for (const intent of list_of_intents) {
         if (intent.tag === tag) {
-            return intent.responses[Math.floor(Math.random() * intent.responses.length)];
+            return randomChoice(intent.responses);
         }
     }
 
-    return 'I am sorry, I do not understand.';
-};
+    return null;
+}
 
-module.exports = getResponse;
+function randomChoice(arr) {
+    const randomIndex = Math.floor(Math.random() * arr.length);
+    return arr[randomIndex];
+}
+
+async function chatbotResponse(text) {
+    const { model, words, classes, intents } = await initialize();
+    const lemmatizedWords = text.split(' ').map(word => WordNet.lemmatize(word));
+    const ints = predictClass(lemmatizedWords.join(' '), model, words);
+    const res = getResponse(ints, intents);
+    return res;
+}
+
+// Example usage
+async function main() {
+    const userInput = 'Hello, how are you?';
+    const response = await chatbotResponse(userInput);
+    console.log(response);
+}
+
+main();

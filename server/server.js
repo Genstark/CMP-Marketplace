@@ -22,7 +22,7 @@ const corsOptions = [
         credentials: true,
     },
     {
-        origin: 'https://cmpmarketplacebackend.onrender.com/',
+        origin: 'http://localhost:2000/',
         methods: 'GET, PUT, PATCH, DELETE, POST',
         credentials: true,
     },
@@ -297,7 +297,7 @@ app.post('/login', (req, res) => {
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
-async function userAddSellProduct(userdata, fileDocument, userId, user){
+async function userAddSellProduct(userdata, userId, user){
     const client = new MongoClient(Decrypt(uri));
 
     try{
@@ -318,9 +318,9 @@ async function userAddSellProduct(userdata, fileDocument, userId, user){
             'price': userdata['price'],
             'overview': userdata['overview'],
             'details': userdata['details'],
-            'image-1': fileDocument[0],
-            'image-2': fileDocument[1],
-            'image-3': fileDocument[2],
+            'image-1': userdata['image-1'],
+            'image-2': userdata['image-2'],
+            'image-3': userdata['image-3'],
             'user_id': userId,
             'category': userdata['category'],
             'date': userdata['date']
@@ -342,34 +342,34 @@ const upload = multer({storage: storage});
 app.post('/addProduct', upload.array('files', 3),(req, res) => {
 
     const userData = req.body;
-    // console.log(userData);
+    console.log(userData);
     // const userId = req.body.token;
     const userId = Decrypt(req.body.token);
     const user = Decrypt(req.body.data);
     // const user = req.body.data;
 
-    let imageCollection = [];
+    // let imageCollection = [];
 
-    if(req.files.length > 0){
-        for(let i=0; i < req.files.length; i++){
-            const fileData = req.files[i].buffer;
-            const fileDocument = {
-                filename: req.files[i].originalname,
-                data: fileData
-            }
+    // if(req.files.length > 0){
+    //     for(let i=0; i < req.files.length; i++){
+    //         const fileData = req.files[i].buffer;
+    //         const fileDocument = {
+    //             filename: req.files[i].originalname,
+    //             data: fileData
+    //         }
 
-            imageCollection.push(fileDocument);
-        }
-    }
+    //         imageCollection.push(fileDocument);
+    //     }
+    // }
     
-    userAddSellProduct(userData, imageCollection, userId, user).then(data => {
-        res.json({
-            message: 'success',
-            data: 'product is ready to sell'
-        });
-    }).catch(error => {
-        console.log(error);
-    });
+    // userAddSellProduct(userData, userId, user).then(data => {
+    //     res.json({
+    //         message: 'success',
+    //         data: 'product is ready to sell'
+    //     });
+    // }).catch(error => {
+    //     console.log(error);
+    // });
 });
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */

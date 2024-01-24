@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import '../styling/AddItem.css';
+import ImageConvertUrl from "../functions/imageUrlApi.js";
 
 function AddItem(){
 
@@ -97,40 +98,43 @@ function AddItem(){
         return numberChecking.test(number);
     }
 
-    const [imagecollection, setImagecollection] = useState([]);
+    // const [imagecollection, setImagecollection] = useState([]);
     
-    async function imageConvertUrl(){
-        const imgdata = new FormData();
+    // async function imageConvertUrl(){
+    //     const imgdata = new FormData();
 
-        for(let i=0; i < imageInputRef.current.files.length; i++){
-            imgdata.append('file', imageInputRef.current.files[i]);
+    //     for(let i=0; i < imageInputRef.current.files.length; i++){
+    //         imgdata.append('file', imageInputRef.current.files[i]);
 
-            const url = 'https://upload-image-and-return-url-by-thichthicodeteam.p.rapidapi.com/api/upload-image';
-            const options1 = {
-                method: 'POST',
-                headers: {
-                    Accept: '*/*',
-                    'X-RapidAPI-Key': '55cfd3b5e1msh42db4a25dc6d649p1e5846jsnd7f392ecde15',
-                    'X-RapidAPI-Host': 'upload-image-and-return-url-by-thichthicodeteam.p.rapidapi.com'
-                },
-                body: imgdata
-            };
-            await fetch(url, options1).then(res => {
-                return res.json();
-            }).then(data => {
-                console.log(data);
-                setImagecollection((prevApiData) => [...prevApiData, data]);
-            }).catch(error => {
-                console.log(error);
-            });
-        }
-    }
+    //         const url = 'https://upload-image-and-return-url-by-thichthicodeteam.p.rapidapi.com/api/upload-image';
+    //         const options1 = {
+    //             method: 'POST',
+    //             headers: {
+    //                 Accept: '*/*',
+    //                 'X-RapidAPI-Key': '55cfd3b5e1msh42db4a25dc6d649p1e5846jsnd7f392ecde15',
+    //                 'X-RapidAPI-Host': 'upload-image-and-return-url-by-thichthicodeteam.p.rapidapi.com'
+    //             },
+    //             body: imgdata
+    //         };
+    //         try{
+    //             const response = await fetch(url, options1);
+    //             const data = await response.json();
+    //             console.log(data);
+    //             setImagecollection((prevApiData) => [...prevApiData, data]);
+    //         } 
+    //         catch(error){
+    //             console.log(error);
+    //         }
+    //     }
+    // }
     
     
     function addProduct(event){
         event.preventDefault();
 
-        imageConvertUrl().then(res => {
+        setButton('Wait...');
+
+        ImageConvertUrl().then(res => {
             
             const data = checkProductInput();
             const formData = new FormData();
@@ -143,34 +147,33 @@ function AddItem(){
             formData.append('state', data['state']);
             formData.append('phonenumber', data['phonenumber']);
             formData.append('price', data['price']);
-            formData.append('files', imagecollection['link'][0]);
-            formData.append('files', imagecollection['link'][1]);
-            formData.append('files', imagecollection['link'][2]);
+            formData.append('image-1', res[0]['link']);
+            formData.append('image-2', res[1]['link']);
+            formData.append('image-3', res[2]['link']);
             formData.append('overview', data['overview']);
             formData.append('details', data['details']);
             formData.append('date', data['date']);
     
             
-            const apiUrl = 'https://cmpmarketplacebackend.onrender.com/addProduct';
+            const apiUrl = 'http://localhost:2000/addProduct';
             const options = {
                 method: 'POST',
                 body: formData
             }
 
             try{
-                setButton('Wait...');
                 fetch(apiUrl, options).then(res => {
                     return res.json();
                 }).then(data => {
                     console.log(data);
-                    setTitle('');
-                    setCategory('');
-                    setAddress('');
-                    setState('');
-                    setNumber('');
-                    setPrice('');
-                    setOverview('');
-                    setDetails('');
+                    // setTitle('');
+                    // setCategory('');
+                    // setAddress('');
+                    // setState('');
+                    // setNumber('');
+                    // setPrice('');
+                    // setOverview('');
+                    // setDetails('');
                     setButton('Add Item');
                 }).catch(error => {
                     console.log(error);
@@ -184,7 +187,7 @@ function AddItem(){
     }
 
 
-    console.log(imagecollection);
+    // console.log(imagecollection);
 
     return(
         <>

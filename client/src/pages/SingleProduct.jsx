@@ -30,7 +30,7 @@ function SingleProduct(){
             try {
                 const currentUrl = window.location.href;
                 const urlFilter = currentUrl.split('/').pop();
-                const apiUrl = `https://cmpmarketplacebackend.onrender.com/items/${urlFilter}`;
+                const apiUrl = `http://localhost:2000/items/${urlFilter}`;
                 const options = {
                     method: 'GET',
                 };
@@ -43,9 +43,9 @@ function SingleProduct(){
                 setTextareaValue(data['data'].details);
                 console.log(data);
 
-                setImage1(data['data']['image-1'].data);
-                setImage2(data['data']['image-2'].data);
-                setImage3(data['data']['image-3'].data);
+                setImage1(data['data']['image-1']);
+                setImage2(data['data']['image-2']);
+                setImage3(data['data']['image-3']);
                 setStatus(true);
             } 
             catch(error){
@@ -107,14 +107,14 @@ function SingleProduct(){
             {status ? apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">
                     <button className="backButton">😂</button>
-                    <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} alt="main item display" className="image" ref={imageRef}/>
+                    <img src={object['image-1']} alt="main item display" className="image" ref={imageRef}/>
                     <button className="forwardButton">🤣</button>
                 </div>
 
                 <div className="imageCollection">
-                    <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} style={imagePosition} alt="image 1" onClick={() => imageRef.current.src = image1} />
-                    <img src={object['image-2'].data || `data:image/${isValidImageType};base64,${object['image-2'].data}`} style={imagePosition} alt="image 2" onClick={() => imageRef.current.src = image2} />
-                    <img src={object['image-3'].data || `data:image/${isValidImageType};base64,${object['image-3'].data}`} style={imagePosition} alt="image 3" onClick={() => imageRef.current.src = image3} />
+                    <img src={object['image-1']} style={imagePosition} alt="image 1" onClick={() => imageRef.current.src = image1} />
+                    <img src={object['image-2']} style={imagePosition} alt="image 2" onClick={() => imageRef.current.src = image2} />
+                    <img src={object['image-3']} style={imagePosition} alt="image 3" onClick={() => imageRef.current.src = image3} />
                 </div>
 
                 <div className="sellerCard">

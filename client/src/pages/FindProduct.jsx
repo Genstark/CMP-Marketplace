@@ -14,7 +14,7 @@ function FindProduct(){
     useEffect(() => {
         const currentUrl = window.location.href;
         const urlFilter = currentUrl.split('/').pop();
-        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/search/${urlFilter}` || `https://cmpmarketplacebackend.onrender.com/item/search/${urlFilter}`;
+        const apiUrl = `http://localhost:2000/item/search/${urlFilter}` || `http://localhost:2000/item/search/${urlFilter}`;
         const options = {
             method: 'GET'
         }
@@ -45,7 +45,7 @@ function FindProduct(){
         
         const currentUrl = window.location.href;
         const urlFilter = currentUrl.split('/').pop();
-        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/search/${urlFilter}`;
+        const apiUrl = `http://localhost:2000/item/search/${urlFilter}`;
         const options = {
             method: 'GET'
         }
@@ -77,7 +77,7 @@ function FindProduct(){
 
             {status ? <div className="itemCard">
                 {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>
-                            <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} alt="image testing" className="itemImage" />
+                            <img src={object['image-1']} alt="image testing" className="itemImage" />
                             <h1 className="itemName">{object.title}</h1>
                             <p className="itemOverView">{object.overview}</p>
                             <p className="itemLocation">{object.state}</p>

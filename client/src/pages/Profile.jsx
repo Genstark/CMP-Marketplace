@@ -19,7 +19,7 @@ function Profile(){
                 const currentUrl = window.location.href;
                 const urlFilter = currentUrl.split('/').pop();
                 console.log(urlFilter);
-                const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/profile/${urlFilter}`;
+                const apiUrl = `http://localhost:2000/item/profile/${urlFilter}`;
                 const options = {
                     method: 'GET',
                 };
@@ -96,7 +96,7 @@ function Profile(){
     const handleDeleteButtonClick = (e, objectId) => {
         e.stopPropagation();
         console.log(`Delete button clicked for object with ID: ${objectId}`);
-        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/delete/${objectId}`;
+        const apiUrl = `http://localhost:2000/item/delete/${objectId}`;
         const options = {
             method: "DELETE"
         }
@@ -148,7 +148,7 @@ function Profile(){
 
                 <div className="productListings">
                     {apiData.map((object) => <div className="itemList" key={object._id} onClick={() => changeLocation(object._id)}>
-                        <img src={object['image-1'].data || `data:image/${isValidImageType};base64,${object['image-1'].data}`} style={{borderBottomLeftRadius: 0}} alt="image testing" className="itemImage" />
+                        <img src={object['image-1']} style={{borderBottomLeftRadius: 0}} alt="image testing" className="itemImage" />
                         <h1 className="itemName">{object.title}</h1>
                         <p className="itemOverView">{object.overview}</p>
                         <p className="itemLocation">{object.state}</p>
