@@ -148,7 +148,7 @@ function Profile(){
 
                 <div className="productListings">
                     {apiData.map((object) => <div className="itemList" key={object._id} onClick={() => changeLocation(object._id)}>
-                        <img src={object['image-1']} style={{borderBottomLeftRadius: 0}} alt="image testing" className="itemImage" />
+                        <img src={object['image-1']} style={{borderBottomLeftRadius: 8}} alt="image testing" className="itemImage" />
                         <h1 className="itemName">{object.title}</h1>
                         <p className="itemOverView">{object.overview}</p>
                         <p className="itemLocation">{object.state}</p>

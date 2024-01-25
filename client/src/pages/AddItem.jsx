@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import '../styling/AddItem.css';
-import ImageConvertUrl from "../functions/imageUrlApi.js";
+import {ImageConvertUrl} from "../functions/imageUrlApi.js";
 
 function AddItem(){
 
@@ -38,7 +38,7 @@ function AddItem(){
     const [address, setAddress] = useState('');
     const [state, setState] = useState('');
     const [number, setNumber] = useState('');
-    const [price, setPrice] = useState('');
+    const [price, setPrice] = useState(0);
     const [overview, setOverview] = useState('');
     const [details, setDetails] = useState('');
 
@@ -134,7 +134,7 @@ function AddItem(){
 
         setButton('Wait...');
 
-        ImageConvertUrl().then(res => {
+        ImageConvertUrl(imageInputRef.current.files).then(res => {
             
             const data = checkProductInput();
             const formData = new FormData();
@@ -171,9 +171,10 @@ function AddItem(){
                     // setAddress('');
                     // setState('');
                     // setNumber('');
-                    // setPrice('');
+                    // setPrice(0);
                     // setOverview('');
                     // setDetails('');
+                    // setTextareaValue('');
                     setButton('Add Item');
                 }).catch(error => {
                     console.log(error);
@@ -210,19 +211,19 @@ function AddItem(){
                 <input type="text" id="address" name="address" placeholder="Street Address" className="inputData" onChange={(e) => setAddress(e.target.value)} value={address} /><br />
 
                 <label htmlFor="state" className="labelName">State:</label><br />
-                <input type="text" id="state" name="state" placeholder="enter your state" className="inputData" onChange={(e) => setState(e.target.value)}  /><br />
+                <input type="text" id="state" name="state" placeholder="enter your state" className="inputData" onChange={(e) => setState(e.target.value)} value={state} /><br />
 
                 <label htmlFor="number" className="labelName">Number:</label><br />
-                <input type="text" id="number" name="number" placeholder="enter your mobile number" className="inputData" onChange={(e) => setNumber(e.target.value)} /><br />
+                <input type="text" id="number" name="number" placeholder="enter your mobile number" className="inputData" onChange={(e) => setNumber(e.target.value)} value={number} /><br />
 
                 <label htmlFor="price" className="labelName">Price:</label><br />
-                <input type="number" id="price" name="price" placeholder="enter price of product" className="inputData" min={100} onChange={(e) => setPrice(e.target.value)} /><br />
+                <input type="number" id="price" name="price" placeholder="enter price of product" className="inputData" min={100} onChange={(e) => setPrice(e.target.value)} value={price} /><br />
 
                 <label htmlFor="images" className="labelName">Images:</label>
                 <input type="file" accept=".jpg,.jpeg,.png" multiple id="images" ref={imageInputRef} className="inputImageProduct" style={{marginLeft: 10, marginBottom: 13, border: 'none'}} /><br />
 
                 <label htmlFor="overview" className="labelName">Overview:</label><br />
-                <textarea name="overview" id="overview" className="inputData" style={{resize: 'none', height: 150, fontSize: 15, paddingTop: 4, overflowY: 'hidden'}} onChange={(e) => setOverview(e.target.value)} /><br />
+                <textarea name="overview" id="overview" className="inputData" style={{resize: 'none', height: 150, fontSize: 15, paddingTop: 4, overflowY: 'hidden'}} onChange={(e) => setOverview(e.target.value)} value={overview} /><br />
 
                 <label htmlFor="details" className="labelName">Details:</label><br />
                 <textarea className="inputData" id="details" name="details" value={textareaValue} onChange={(e) => {setTextareaValue(e.target.value);

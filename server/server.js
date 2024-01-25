@@ -13,7 +13,8 @@ app.use(express.urlencoded({extended: true}));
 
 app.use('/public', express.static(path.join(__dirname, 'public'), { 'extensions': ['html', 'js', 'css'] }));
 
-app.use(express.static('client/dist'));
+// app.use(express.static('client/dist'));
+app.use(express.static('client'));
 
 const corsOptions = [
     {
@@ -362,14 +363,14 @@ app.post('/addProduct', upload.array('files', 3),(req, res) => {
     //     }
     // }
     
-    // userAddSellProduct(userData, userId, user).then(data => {
-    //     res.json({
-    //         message: 'success',
-    //         data: 'product is ready to sell'
-    //     });
-    // }).catch(error => {
-    //     console.log(error);
-    // });
+    userAddSellProduct(userData, userId, user).then(data => {
+        res.json({
+            message: 'success',
+            data: 'product is ready to sell'
+        });
+    }).catch(error => {
+        console.log(error);
+    });
 });
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
@@ -450,7 +451,7 @@ app.post('/chatbot', (req, res) => {
 // });
 
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist/index.html'));
+    res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */

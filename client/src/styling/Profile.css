@@ -41,8 +41,8 @@
     width: 100%;
     margin-bottom: 3px;
     border-radius: 10px;
-    cursor: 'pointer';
-    overflow: 'hidden';
+    cursor: pointer;
+    overflow: hidden;
 }
 
 .deleteButton{
