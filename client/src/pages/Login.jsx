@@ -64,8 +64,8 @@ function Login(){
             if(data.done){
                 sessionStorage.setItem("data", Encryption(data.data));
                 sessionStorage.setItem('token', Encryption(data.token));
-                window.location.href = '/';
-                // window.history.back();
+                // window.location.href = '/';
+                window.history.back();
                 // window.location.reload();
             }
             else{
