@@ -7,31 +7,31 @@ import pickle
 import numpy as np
 import tensorflow
 
-# all_nltk_packages = nltk.data.find("corpora").split()
+all_nltk_packages = nltk.data.find("corpora").split()
 
-# # Check if a specific package is installed
-# def check_nltk_package(package_name):
-#     try:
-#         nltk.data.find(package_name)
-#         print(f"{package_name} is already installed.")
-#         return True
-#     except LookupError:
-#         print(f"{package_name} is not installed.")
-#         return False
+# Check if a specific package is installed
+def check_nltk_package(package_name):
+    try:
+        nltk.data.find(package_name)
+        print(f"{package_name} is already installed.")
+        return True
+    except LookupError:
+        print(f"{package_name} is not installed.")
+        return False
 
-# # Check and install all NLTK packages
-# def check_and_install_all_nltk_packages(package_names):
-#     packages_to_install = [package for package in package_names if not check_nltk_package(package)]
+# Check and install all NLTK packages
+def check_and_install_all_nltk_packages(package_names):
+    packages_to_install = [package for package in package_names if not check_nltk_package(package)]
     
-#     if packages_to_install:
-#         print("Installing missing packages...")
-#         nltk.download(packages_to_install)
-#         print("All packages have been installed.")
-#     else:
-#         print("All NLTK packages are already installed.")
+    if packages_to_install:
+        print("Installing missing packages...")
+        nltk.download(packages_to_install)
+        print("All packages have been installed.")
+    else:
+        print("All NLTK packages are already installed.")
 
-# # Check and install all NLTK packages
-# check_and_install_all_nltk_packages(all_nltk_packages)
+# Check and install all NLTK packages
+check_and_install_all_nltk_packages(all_nltk_packages)
 
 
 # model = tensorflow.keras.models.load_model('model.h5')

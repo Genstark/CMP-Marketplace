@@ -6,30 +6,38 @@ import '../styling/TestingComponent.css';
 const Chatbox = () => {
     const [messages, setMessages] = useState([]);
     const [userInput, setUserInput] = useState('');
+    const [buttonDisable, setButtonDisable] = useState(false);
+    const [buttonClick, setButtonClick] = useState('Send');
   
     const sendMessage = () => {
         if(userInput.trim() === ''){
             return;
         }
 
-        const apiUrl = 'https://cmpmarketplaceai.onrender.com/chatbot';
+        const apiUrl = 'http://localhost:3000/chatbot';
         const options = {
             method: 'POST',
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             },
-            body: JSON.stringify({"userQuery": userInput})
+            body: JSON.stringify({"userQuery": userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase()})
         }
 
-        setMessages((prevMessage) => [...prevMessage, {text: userInput, sender: 'user'}]);
+        setMessages((prevMessage) => [...prevMessage, {text: userInput.charAt(0).toUpperCase() + userInput.slice(1).toLowerCase(), sender: 'user'}]);
+
+        setButtonDisable(true);
+        setButtonClick('Wait..');
 
         fetch(apiUrl, options).then(res => {
             return res.json();
         }).then(data => {
             console.log(data);
             setMessages((prevMessage) => [...prevMessage, {text: data['data'], sender: 'bot'}]);
+            setButtonDisable(false);
+            setButtonClick('Send');
         }).catch(error => {
             console.log('model is not working');
+            console.log(error);
         });
 
         // setMessages((prevMessages) => [
@@ -59,7 +67,7 @@ const Chatbox = () => {
                     onChange={(e) => setUserInput(e.target.value)}
                     placeholder="Type your message..."
                 />
-                <button onClick={sendMessage} className="botbutton">Send</button>
+                <button onClick={sendMessage} className="botbutton" disabled={buttonDisable}>{buttonClick}</button>
             </div>
         </div>
     );
