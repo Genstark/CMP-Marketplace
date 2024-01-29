@@ -19,7 +19,7 @@ function Profile(){
                 const currentUrl = window.location.href;
                 const urlFilter = currentUrl.split('/').pop();
                 console.log(urlFilter);
-                const apiUrl = `http://localhost:2000/item/profile/${urlFilter}`;
+                const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/profile/${urlFilter}`;
                 const options = {
                     method: 'GET',
                 };
@@ -96,7 +96,7 @@ function Profile(){
     const handleDeleteButtonClick = (e, objectId) => {
         e.stopPropagation();
         console.log(`Delete button clicked for object with ID: ${objectId}`);
-        const apiUrl = `http://localhost:2000/item/delete/${objectId}`;
+        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/delete/${objectId}`;
         const options = {
             method: "DELETE"
         }

@@ -12,7 +12,7 @@ const Chatbox = () => {
             return;
         }
 
-        const apiUrl = 'http://localhost:3000/chatbot';
+        const apiUrl = 'https://cmpmarketplaceai.onrender.com/chatbot';
         const options = {
             method: 'POST',
             headers: {

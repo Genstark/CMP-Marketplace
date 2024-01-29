@@ -30,7 +30,7 @@ function SingleProduct(){
             try {
                 const currentUrl = window.location.href;
                 const urlFilter = currentUrl.split('/').pop();
-                const apiUrl = `http://localhost:2000/items/${urlFilter}`;
+                const apiUrl = `https://cmpmarketplacebackend.onrender.com/items/${urlFilter}`;
                 const options = {
                     method: 'GET',
                 };
