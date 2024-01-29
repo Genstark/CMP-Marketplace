@@ -12,7 +12,7 @@ const Chatbox = () => {
             return;
         }
 
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/chatbot';
+        const apiUrl = 'http://localhost:3000/chatbot';
         const options = {
             method: 'POST',
             headers: {
@@ -32,13 +32,13 @@ const Chatbox = () => {
             console.log('model is not working');
         });
 
-        setMessages((prevMessages) => [
-            ...prevMessages,
-            { text: userInput, sender: 'user' },
-            { text: 'Hello! I am a bot.', sender: 'bot' }
-        ]);
+        // setMessages((prevMessages) => [
+        //     ...prevMessages,
+        //     { text: userInput, sender: 'user' },
+        //     { text: 'Hello! I am a bot.', sender: 'bot' }
+        // ]);
 
-        setMessages((prevMessage) => [...prevMessage, {text: getResponse(userInput), sender: 'bot'}]);
+        // setMessages((prevMessage) => [...prevMessage, {text: getResponse(userInput), sender: 'bot'}]);
   
         setUserInput('');
     };
@@ -78,10 +78,6 @@ function ComponentTesting(){
         <>
             <div className="home-page">
                 <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={() => window.location.href = '/'}>Compro Marketplace</h3>
-            </div>
-
-            <div>
-                <p>Output: {output !== null ? output.toFixed(4) : 'Loading...'}</p>
             </div>
 
             {/* <div style={{
