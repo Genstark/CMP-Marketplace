@@ -2,3 +2,4 @@ tensorflow
 nltk
 gunicorn
 flask
+flask_cors
