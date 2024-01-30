@@ -1,5 +1,6 @@
 __pycache__
 Scripts
 Lib
+Include
 .vscode/*
 !.vscode/extensions.json

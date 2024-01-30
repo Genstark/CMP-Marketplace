@@ -32,12 +32,13 @@ const Chatbox = () => {
             return res.json();
         }).then(data => {
             console.log(data);
-            setMessages((prevMessage) => [...prevMessage, {text: data['data'], sender: 'bot'}]);
+            setMessages((prevMessage) => [...prevMessage, {sender: 'bot', text: data['data']}]);
             setButtonDisable(false);
             setButtonClick('Send');
         }).catch(error => {
             console.log('model is not working');
             console.log(error);
+            setButtonClick('Send');
         });
 
         // setMessages((prevMessages) => [
