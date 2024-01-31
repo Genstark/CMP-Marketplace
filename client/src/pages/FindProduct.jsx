@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../styling/Home.css';
 import userImge from '../image/user.png';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Header from '../component/Header.jsx';
 import LoadingBar from "../component/Loading.jsx";
 
@@ -10,11 +10,12 @@ function FindProduct(){
 
     const [apiData, setApiData] = useState([]);
     const [status, setStatus] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const currentUrl = window.location.href;
         const urlFilter = currentUrl.split('/').pop();
-        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/search/${urlFilter}`;
+        const apiUrl = `http://localhost:2000/item/search/${urlFilter}`;
         const options = {
             method: 'GET'
         }
@@ -45,7 +46,7 @@ function FindProduct(){
         
         const currentUrl = window.location.href;
         const urlFilter = currentUrl.split('/').pop();
-        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/search/${urlFilter}`;
+        const apiUrl = `http://localhost:2000/item/search/${urlFilter}`;
         const options = {
             method: 'GET'
         }
@@ -61,19 +62,27 @@ function FindProduct(){
     }
 
     function changeLocation(id){
-        window.location.href = `/item/${id}`;
+        // window.location.href = `/item/${id}`;
+        navigate(`/item/${id}`);
     }
 
     function loginPage(){
-        window.location.href = `/login`;
+        // window.location.href = `/login`;
+        navigate(`/login`);
     }
 
-    const validImageTypes = ['png', 'jpeg', 'jpg'];
-    const isValidImageType = validImageTypes.includes(validImageTypes);
+    function clickEnter(event){
+        if(event.key === "Enter"){
+            finding();
+        }
+    }
+
+    // const validImageTypes = ['png', 'jpeg', 'jpg'];
+    // const isValidImageType = validImageTypes.includes(validImageTypes);
 
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} pressEnter={clickEnter} />
 
             {status ? <div className="itemCard">
                 {apiData.map((object) => <div className="item" key={object._id} onClick={() => changeLocation(object._id)}>

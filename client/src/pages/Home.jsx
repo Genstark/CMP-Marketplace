@@ -2,15 +2,17 @@ import React, { useState, useEffect, useRef } from "react";
 import '../styling/Home.css';
 import Header from '../component/Header.jsx';
 import LoadingBar from "../component/Loading.jsx";
+import { useNavigate } from "react-router-dom";
 
 function HomePage(){
 
     const [apiData, setApiData] = useState([]);
     const [status, setStatus] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
 
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/items';
+        const apiUrl = 'http://localhost:2000/items';
         const options = {
             method: 'GET'
         }
@@ -29,7 +31,8 @@ function HomePage(){
     console.log(apiData);
 
     function changeLocation(id){
-        window.location.href = `/item/${id}`;
+        // window.location.href = `/item/${id}`;
+        navigate(`/item/${id}`);
     }
 
     const [search, setSearch] = useState('');
@@ -39,11 +42,13 @@ function HomePage(){
     }
 
     function finding(){
-        window.location.href = `/items/search/${search}`;
+        // window.location.href = `/items/search/${search}`;
+        navigate(`/items/search/${search}`);
     }
 
     function loginPage(){
-        window.location.href = `/login`;
+        // window.location.href = `/login`;
+        navigate('/login');
     }
 
     function logout(){
@@ -51,8 +56,8 @@ function HomePage(){
     }
     
 
-    const validImageTypes = ['png', 'jpeg', 'jpg'];
-    const isValidImageType = validImageTypes.includes(validImageTypes);
+    // const validImageTypes = ['png', 'jpeg', 'jpg'];
+    // const isValidImageType = validImageTypes.includes(validImageTypes);
 
     return(
         <>

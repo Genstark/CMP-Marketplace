@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import '../styling/Signup.css'
+import { useNavigate } from "react-router-dom";
 
 function Signup(){
 
@@ -8,6 +9,7 @@ function Signup(){
     const [userEmail, setUserEmail] = useState('');
     const [password, setPassword] = useState('');
     const [signupButton, setsignupButton] = useState('Signup');
+    const navigate = useNavigate();
 
 
     function getUserName(event){
@@ -68,7 +70,7 @@ function Signup(){
 
         const Data = checkingData();
         
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/signIn';
+        const apiUrl = 'http://localhost:2000/signIn';
         const options = {
             method : "POST",
             headers:{
@@ -106,7 +108,7 @@ function Signup(){
     return(
         <>
             <div className="home-page">
-                <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={Homepage}>Compro Marketplace</h3>
+                <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={() => navigate('/')}>Compro Marketplace</h3>
             </div>
 
             <div className="signupPage">
@@ -123,7 +125,7 @@ function Signup(){
                 <input type="password" placeholder="Password" id="userPassword" value={password} className="inputPassword" onChange={getUserPassword} /><br />
 
                 <button className="loginButton" onClick={signup} >{signupButton}</button>
-                <p style={{fontWeight: 'bolder', textAlign: 'center'}}>Don't have an account? <span className="mousepointer" onClick={loginPage}>Login</span></p>
+                <p style={{fontWeight: 'bolder', textAlign: 'center'}}>Don't have an account? <span className="mousepointer" onClick={() => navigate('/login')}>Login</span></p>
             </div>
         </>
     );

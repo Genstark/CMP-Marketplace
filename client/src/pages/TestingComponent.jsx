@@ -1,6 +1,7 @@
 import React, {useState, useRef, useEffect} from "react";
 import Header from "../component/Header.jsx";
 import '../styling/TestingComponent.css';
+import { useNavigate } from "react-router-dom";
 
 
 const Chatbox = () => {
@@ -82,11 +83,12 @@ function ComponentTesting(){
 
     const [mouseX, setMouseX] = useState('mouse is out');
     const mouseRef = useRef(null);
+    const navigator = useNavigate();
 
     return(
         <>
             <div className="home-page">
-                <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={() => window.location.href = '/'}>Compro Marketplace</h3>
+                <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={() => navigator('/')}>Compro Marketplace</h3>
             </div>
 
             {/* <div style={{

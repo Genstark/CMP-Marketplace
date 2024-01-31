@@ -1,11 +1,13 @@
 import React, {useState} from "react";
 import '../styling/Login.css';
 import { Encryption } from "../functions/Encryption.js";
+import { useNavigate } from "react-router-dom";
 
 function Login(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [userlogin, setUserlogin] = useState('Login');
+    const  navigate = useNavigate();
 
     function getUserEmail(event){
         event.preventDefault();
@@ -47,7 +49,7 @@ function Login(){
     function login(){
         const Data = checkData();
         
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/login';
+        const apiUrl = 'http://localhost:2000/login';
         const options = {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
@@ -81,17 +83,20 @@ function Login(){
 
 
     function Homepage(){
-        window.location.href = "/";
+        // window.location.href = "/";
+        navigate('/');
     }
 
     function registration(){
-        window.location.href = "/signup";
+        // window.location.href = "/signup";
+        navigate('/signup');
     }
 
     return(
         <>
             <div className="home-page">
-                <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={Homepage}>Compro Marketplace</h3>
+                {/* <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={Homepage}>Compro Marketplace</h3>*/}
+                <h3 className="heading" style={{marginLeft: 'auto', marginRight: 'auto'}} onClick={() => navigate('/')}>Compro Marketplace</h3> 
             </div>
 
             <div className="loginPage">
@@ -102,7 +107,8 @@ function Login(){
                 <input type="password" placeholder="Password" id="userPassword" className="inputEmail" onChange={getUserPassword} /><br />
 
                 <button className="loginButton" onClick={login}>{userlogin}</button>
-                <p style={{fontWeight: 'bolder', textAlign: 'center'}}>Don't have an account? <span className="mousepointer" onClick={registration}>Register</span></p>
+                {/* <p style={{fontWeight: 'bolder', textAlign: 'center'}}>Don't have an account? <span className="mousepointer" onClick={registration}>Register</span></p> */}
+                <p style={{fontWeight: 'bolder', textAlign: 'center'}}>Don't have an account? <span className="mousepointer" onClick={() => navigate('/signup')}>Register</span></p>
             </div>
         </>
     );

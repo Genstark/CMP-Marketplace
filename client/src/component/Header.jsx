@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import '../styling/Header.css';
 import userImge from '../image/user.png';
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Decrypt } from "../functions/Encryption.js";
 
 
@@ -44,6 +44,7 @@ function WithoutLogin({toLoginPage}){
 function CustomDropdown({name}){
     const [isOpen, setIsOpen] = useState(false);
     const [selectedOption, setSelectedOption] = useState(name);
+    const navigate = useNavigate();
 
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
@@ -57,14 +58,15 @@ function CustomDropdown({name}){
     function profilePage(){
         const data = sessionStorage.getItem('data');
         const token = sessionStorage.getItem('token');
-        window.location.href = `/profile/${Decrypt(data)}/${Decrypt(token)}`;
+        // window.location.href = `/profile/${Decrypt(data)}/${Decrypt(token)}`;
+        navigate(`/profile/${Decrypt(data)}/${Decrypt(token)}`);
     }
 
     function logoutFunction(){
         sessionStorage.clear();
         window.location.reload();
     }
-  
+
     return (
         <div className="custom-dropdown">
             <div className="loginRegister" onClick={toggleDropdown} style={{marginTop: 8}}>
@@ -73,8 +75,8 @@ function CustomDropdown({name}){
             {isOpen && (
                 <ul className="dropdown-options">
                     <li onClick={profilePage}>Profile</li>
-                    <li onClick={() => window.location.href = '/addItem'}>Add Item</li>
-                    <li onClick={() => window.location.href = '/testingComponent'}>Testing Component</li>
+                    <li onClick={() => navigate('/addItem')}>Add Item</li>
+                    <li onClick={() => navigate('/testingComponent')}>Testing Component</li>
                     <li onClick={logoutFunction}>Logout</li>
                 </ul>
             )}
@@ -83,7 +85,7 @@ function CustomDropdown({name}){
 };
 
 
-function Header({search, clickSearch, toLoginPage, logout}){
+function Header({search, clickSearch, toLoginPage, logout, pressEnter}){
 
     const [loginOrNot, setLoginOrNot] = useState('Login/Register');
     const [loginStatus, setLoginStatus] = useState(false);
@@ -106,7 +108,7 @@ function Header({search, clickSearch, toLoginPage, logout}){
     return(
         <div className="home-page">
             <h3 className="heading" onClick={() => window.location.href = '/'}>Compro Marketplace</h3>
-            <input type="input" className="userinput" placeholder="search item" onChange={(e) => search(e.target.value)} />
+            <input type="input" className="userinput" placeholder="search item" onChange={(e) => search(e.target.value)} onKeyDown={pressEnter}/>
 
             <select name="types" id="productType" className="productTypeClass" alt="choose product type" title="choose product type">
                 <option value="none" alt="nothing">Choose Type</option>

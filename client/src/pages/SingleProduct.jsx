@@ -4,6 +4,7 @@ import userImge from '../image/user.png';
 import { Link } from 'react-router-dom';
 import Header from '../component/Header.jsx';
 import LoadingBar from "../component/Loading.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 function SingleProduct(){
@@ -30,7 +31,7 @@ function SingleProduct(){
             try {
                 const currentUrl = window.location.href;
                 const urlFilter = currentUrl.split('/').pop();
-                const apiUrl = `https://cmpmarketplacebackend.onrender.com/items/${urlFilter}`;
+                const apiUrl = `http://localhost:2000/items/${urlFilter}`;
                 const options = {
                     method: 'GET',
                 };
@@ -71,7 +72,8 @@ function SingleProduct(){
     console.log(apiData);
 
     function ToProfilePage(id, username){
-        window.location.href = `/profile/${username}/${id}`;
+        // window.location.href = `/profile/${username}/${id}`;
+        navigator(`/profile/${username}/${id}`);
     }
 
     const [search, setSearch] = useState('');
@@ -81,7 +83,8 @@ function SingleProduct(){
     }
 
     function finding(){
-        window.location.href = `/items/search/${search}`;
+        // window.location.href = `/items/search/${search}`;
+        navigator(`/items/search/${search}`);
     }
 
 
@@ -102,7 +105,7 @@ function SingleProduct(){
 
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} toLoginPage={() => window.location.href = `/login`} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={() => navigator(`/login`)} />
 
             {status ? apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">

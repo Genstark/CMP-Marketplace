@@ -3,6 +3,7 @@ import userImge from '../image/user.png';
 import '../styling/Profile.css';
 import Header from '../component/Header.jsx';
 import LoadingBar from "../component/Loading.jsx";
+import { useNavigate } from "react-router-dom";
 
 
 function Profile(){
@@ -12,6 +13,7 @@ function Profile(){
     const [userNumber, setUserNumber] = useState('');
     const [userAddress, setUserAddress] = useState('');
     const [status, setStatus] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchData = async () => {
@@ -19,7 +21,7 @@ function Profile(){
                 const currentUrl = window.location.href;
                 const urlFilter = currentUrl.split('/').pop();
                 console.log(urlFilter);
-                const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/profile/${urlFilter}`;
+                const apiUrl = `http://localhost:2000/item/profile/${urlFilter}`;
                 const options = {
                     method: 'GET',
                 };
@@ -57,7 +59,7 @@ function Profile(){
     const [search, setSearch] = useState('');
     function userSearch(value){
         setSearch(value);
-        console.log(value)
+        console.log(value);
     }
 
     function finding(){
@@ -96,7 +98,7 @@ function Profile(){
     const handleDeleteButtonClick = (e, objectId) => {
         e.stopPropagation();
         console.log(`Delete button clicked for object with ID: ${objectId}`);
-        const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/delete/${objectId}`;
+        const apiUrl = `http://localhost:2000/item/delete/${objectId}`;
         const options = {
             method: "DELETE"
         }

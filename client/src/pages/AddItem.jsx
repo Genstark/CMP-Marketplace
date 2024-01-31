@@ -1,6 +1,7 @@
 import React, {useState, useEffect, useRef} from "react";
 import '../styling/AddItem.css';
 import {ImageConvertUrl} from "../functions/imageUrlApi.js";
+import { useNavigate } from "react-router-dom";
 
 function AddItem(){
 
@@ -11,6 +12,8 @@ function AddItem(){
     const [status, setStatus] = useState(false);
 
     const [button, setButton] = useState('Add Item');
+
+    const navigate = useNavigate();
 
     useEffect(() => {
         const element = detailsTextareaRef.current;
@@ -25,7 +28,8 @@ function AddItem(){
         }
         else{
             setStatus(false);
-            window.location.href = '/login';
+            // window.location.href = '/login';
+            navigate('/login');
         }
     }, [textareaValue]);
 
@@ -155,7 +159,7 @@ function AddItem(){
             formData.append('date', data['date']);
     
             
-            const apiUrl = 'https://cmpmarketplacebackend.onrender.com/addProduct';
+            const apiUrl = 'http://localhost:2000/addProduct';
             const options = {
                 method: 'POST',
                 body: formData
@@ -185,6 +189,12 @@ function AddItem(){
             }
 
         });
+    }
+
+    function pressEnter(event){
+        if (event.key === "Enter") {
+            addProduct();
+        }
     }
 
 
@@ -236,6 +246,8 @@ function AddItem(){
                         paddingTop: 4,
                         overflowY: 'hidden'}
                     }
+
+                    onKeyDown={pressEnter}
                 />
 
                 <button className="addProduct" onClick={addProduct}>{button}</button>
