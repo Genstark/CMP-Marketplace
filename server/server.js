@@ -23,7 +23,7 @@ const corsOptions = [
         credentials: true,
     },
     {
-        origin: 'http://localhost:2000/',
+        origin: 'https://cmpmarketplacebackend.onrender.com/',
         methods: 'GET, PUT, PATCH, DELETE, POST',
         credentials: true,
     },
