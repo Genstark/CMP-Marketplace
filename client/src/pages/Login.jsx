@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useRef} from "react";
 import '../styling/Login.css';
 import { Encryption } from "../functions/Encryption.js";
 import { useNavigate } from "react-router-dom";
@@ -55,30 +55,32 @@ function Login(){
             headers: {'Content-Type':'application/json'},
             body: JSON.stringify(Data),
         }
-
-        setUserlogin('Wait...');
         
-        fetch(apiUrl, options).then(res => {
-            return res.json();
-        }).then(data => {
-            console.log(data);
+        if(Data){
+            setUserlogin('Wait...');
+            fetch(apiUrl, options).then(res => {
+                return res.json();
+            }).then(data => {
+                console.log(data);
 
-            if(data.done){
-                sessionStorage.setItem("data", Encryption(data.data));
-                sessionStorage.setItem('token', Encryption(data.token));
-                window.location.href = '/';
-                // window.history.back();
-                // window.location.reload();
-            }
-            else{
+                if(data.done){
+                    sessionStorage.setItem("data", Encryption(data.data));
+                    sessionStorage.setItem('token', Encryption(data.token));
+                    // window.location.href = '/';
+                    navigate(-1);
+                    // window.history.back();
+                    // window.location.reload();
+                }
+                else{
+                    setUserlogin('Login');
+                    alert('Wrong Email or Password! Try again!');
+                }
+
                 setUserlogin('Login');
-                alert('Wrong Email or Password! Try again!');
-            }
-
-            setUserlogin('Login');
-        }).catch(error => {
-            console.log("Error in Fetching data from server");
-        });
+            }).catch(error => {
+                console.log("Error in Fetching data from server");
+            });
+        }
     }
 
 
@@ -98,6 +100,20 @@ function Login(){
         }
     }
 
+
+    const passwordRef = useRef(null);
+
+    function seePassword(event){
+        if(event.target.checked === true){
+            console.log('checked');
+            passwordRef.current.type = 'text';
+        }
+        else{
+            console.log('not checked');
+            passwordRef.current.type = 'password';
+        }
+    }
+
     return(
         <>
             <div className="home-page">
@@ -110,9 +126,12 @@ function Login(){
                 <input type="input" placeholder="Example@gmail.com" id="userEmail" className="inputEmail" onChange={getUserEmail} /><br />
 
                 <label htmlFor="userPassword" className="passwordLabel">Password:</label><br />
-                <input type="password" placeholder="Password" id="userPassword" className="inputEmail" onChange={getUserPassword} onKeyDown={clickEnter} /><br />
+                <input type="password" ref={passwordRef} placeholder="Password" id="userPassword" className="inputEmail" onChange={getUserPassword} onKeyDown={clickEnter} /><br />
+
+                <input type="checkbox" alt="checkbox to password" onChange={seePassword} /><span style={{fontWeight: 'bold'}}>Show Password</span><br/>
 
                 <button className="loginButton" onClick={login}>{userlogin}</button>
+
                 {/* <p style={{fontWeight: 'bolder', textAlign: 'center'}}>Don't have an account? <span className="mousepointer" onClick={registration}>Register</span></p> */}
                 <p style={{fontWeight: 'bolder', textAlign: 'center'}}>Don't have an account? <span className="mousepointer" onClick={() => navigate('/signup')}>Register</span></p>
             </div>

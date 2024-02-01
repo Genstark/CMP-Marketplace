@@ -38,7 +38,7 @@ function HomePage(){
     const [search, setSearch] = useState('');
     function userSearch(value){
         setSearch(value);
-        console.log(value)
+        console.log(value);
     }
 
     function finding(){

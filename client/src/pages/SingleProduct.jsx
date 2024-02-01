@@ -17,6 +17,8 @@ function SingleProduct(){
     const [image3, setImage3] = useState('');
     const [status, setStatus] = useState(false);
 
+    const  navigate = useNavigate();
+
     useEffect(() => {
 
         const element = document.getElementById('itemDetail');
@@ -73,7 +75,7 @@ function SingleProduct(){
 
     function ToProfilePage(id, username){
         // window.location.href = `/profile/${username}/${id}`;
-        navigator(`/profile/${username}/${id}`);
+        navigate(`/profile/${username}/${id}`);
     }
 
     const [search, setSearch] = useState('');
@@ -84,7 +86,7 @@ function SingleProduct(){
 
     function finding(){
         // window.location.href = `/items/search/${search}`;
-        navigator(`/items/search/${search}`);
+        navigate(`/items/search/${search}`);
     }
 
 
@@ -111,7 +113,7 @@ function SingleProduct(){
 
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} toLoginPage={() => navigator(`/login`)} pressEnter={clickEnter} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={() => navigate(`/login`)} pressEnter={clickEnter} />
 
             {status ? apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">
