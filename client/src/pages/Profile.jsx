@@ -53,7 +53,8 @@ function Profile(){
     console.log(apiData);
 
     function changeLocation(id){
-        window.location.href = `/item/${id}`;
+        // window.location.href = `/item/${id}`;
+        navigate(`/item/${id}`);
     }
 
     const [search, setSearch] = useState('');
@@ -63,11 +64,13 @@ function Profile(){
     }
 
     function finding(){
-        window.location.href = `/items/search/${search}`;
+        // window.location.href = `/items/search/${search}`;
+        navigate(`/items/search/${search}`);
     }
 
     function loginPage(){
-        window.location.href = `/login`;
+        // window.location.href = `/login`;
+        navigate('/login');
     }
 
     const showDataOrNot = sessionStorage.getItem('data');
@@ -113,11 +116,17 @@ function Profile(){
         // });
         
         setApiData(apiData.filter(data => data._id !== objectId));
-    };      
+    };
+    
+    function clickEnter(event){
+        if(event.key === 'Enter'){
+            finding();
+        }
+    }
 
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} pressEnter={clickEnter} />
 
             {status ? <div className="maincontainer">
                 <div className="profileInfo">

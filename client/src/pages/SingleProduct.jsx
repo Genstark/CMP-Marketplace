@@ -98,6 +98,12 @@ function SingleProduct(){
         }
     }
 
+    function clickEnter(event){
+        if(event.key === 'Enter'){
+            finding();
+        }
+    }
+
     const imageRef = useRef(null);
 
     const validImageTypes = ['png', 'jpeg', 'jpg'];
@@ -105,7 +111,7 @@ function SingleProduct(){
 
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} toLoginPage={() => navigator(`/login`)} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={() => navigator(`/login`)} pressEnter={clickEnter} />
 
             {status ? apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">

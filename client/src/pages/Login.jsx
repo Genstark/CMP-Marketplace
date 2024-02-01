@@ -92,6 +92,12 @@ function Login(){
         navigate('/signup');
     }
 
+    function clickEnter(event){
+        if(event.key === 'Enter'){
+            login();
+        }
+    }
+
     return(
         <>
             <div className="home-page">
@@ -104,7 +110,7 @@ function Login(){
                 <input type="input" placeholder="Example@gmail.com" id="userEmail" className="inputEmail" onChange={getUserEmail} /><br />
 
                 <label htmlFor="userPassword" className="passwordLabel">Password:</label><br />
-                <input type="password" placeholder="Password" id="userPassword" className="inputEmail" onChange={getUserPassword} /><br />
+                <input type="password" placeholder="Password" id="userPassword" className="inputEmail" onChange={getUserPassword} onKeyDown={clickEnter} /><br />
 
                 <button className="loginButton" onClick={login}>{userlogin}</button>
                 {/* <p style={{fontWeight: 'bolder', textAlign: 'center'}}>Don't have an account? <span className="mousepointer" onClick={registration}>Register</span></p> */}

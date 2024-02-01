@@ -52,6 +52,12 @@ const Chatbox = () => {
   
         setUserInput('');
     };
+
+    function clickEnter(event){
+        if(event.key === "Enter"){
+            sendMessage();
+        }
+    }
   
     return (
         <div className="chatbox">
@@ -68,6 +74,7 @@ const Chatbox = () => {
                     value={userInput}
                     onChange={(e) => setUserInput(e.target.value)}
                     placeholder="Type your message..."
+                    onKeyDown={clickEnter}
                 />
                 <button onClick={sendMessage} className="botbutton" disabled={buttonDisable}>{buttonClick}</button>
             </div>

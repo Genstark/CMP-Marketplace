@@ -54,6 +54,12 @@ function HomePage(){
     function logout(){
         console.log('working');
     }
+
+    function clickEnter(event){
+        if(event.key === 'Enter'){
+            finding();
+        }
+    }
     
 
     // const validImageTypes = ['png', 'jpeg', 'jpg'];
@@ -61,7 +67,7 @@ function HomePage(){
 
     return(
         <>
-            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} logout={logout} />
+            <Header search={userSearch} clickSearch={finding} toLoginPage={loginPage} logout={logout} pressEnter={clickEnter} />
             
             {status ? <div className="itemCard">
                 {/* <ul>

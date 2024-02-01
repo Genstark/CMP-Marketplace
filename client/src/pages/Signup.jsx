@@ -98,11 +98,13 @@ function Signup(){
     }
 
     function Homepage(){
-        window.location.href = "/";
+        // window.location.href = "/";
+        navigate('/');
     }
 
     function loginPage(){
-        window.location.href = '/login';
+        // window.location.href = '/login';
+        navigate('/login');
     }
 
     return(
