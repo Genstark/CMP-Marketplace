@@ -46,7 +46,7 @@ function Signup(){
             return;
         }
         else if(password.length < 8){
-            alert("password should be less than or equal to 8 characters");
+            alert("password should be greater than or equal to 8 characters");
             return;
         }
         else{            
