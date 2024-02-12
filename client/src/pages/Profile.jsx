@@ -1,8 +1,8 @@
 import React, {useState, useEffect, useRef} from "react";
 import userImge from '../image/user.png';
 import '../styling/Profile.css';
-import Header from '../component/Header.jsx';
-import LoadingBar from "../component/Loading.jsx";
+import Header from '../components/Header.jsx';
+import LoadingBar from "../components/Loading.jsx";
 import { useNavigate } from "react-router-dom";
 
 
@@ -13,6 +13,7 @@ function Profile(){
     const [userNumber, setUserNumber] = useState('');
     const [userAddress, setUserAddress] = useState('');
     const [status, setStatus] = useState(false);
+    const [withItem, setWithItem] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -31,11 +32,16 @@ function Profile(){
 
                 // Update state after data is fetched
                 setApiData(data['data']);
+                setWithItem(data['withItem']);
                 setUserName(data['data'][0]['userName']);
                 setUserNumber(data['data'][0]['phoneNumber']);
                 setUserAddress(data['data'][0]['Address']);
                 
-                // if(setUserAddress(data['data'][0]['userName'])){
+                
+                // if(withItem === false){
+                //     setUserName(data['data'][0]['UserName']);
+                //     setUserNumber(data['data'][0]['PhoneNumber']);
+                //     setUserAddress('**********');
                 // }
 
                 setStatus(true);
@@ -157,7 +163,7 @@ function Profile(){
                     }}>Address: {renderMainData() ? userAddress : '**********'}</h3>
                 </div>
 
-                <div className="productListings">
+                {withItem ? <div className="productListings">
                     {apiData.map((object) => <div className="itemList" key={object._id} onClick={() => changeLocation(object._id)}>
                         <img src={object['image-1']} style={{borderBottomLeftRadius: 8}} alt="image testing" className="itemImage" />
                         <h1 className="itemName">{object.title}</h1>
@@ -165,7 +171,7 @@ function Profile(){
                         <p className="itemLocation">{object.state}</p>
                         {/* <button className="deleteButton" onClick={(e) => handleDeleteButtonClick(e, object._id)}>{deleteButtonRef}</button> */}
                     </div>)}
-                </div>
+                </div> : <h1 style={{margin : 'auto'}}>Currently, there are no uploaded items</h1>}
             </div> : <LoadingBar />}
 
         </>

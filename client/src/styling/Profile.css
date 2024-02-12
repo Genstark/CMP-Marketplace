@@ -9,7 +9,7 @@
 .profileInfo{
     border: 1px solid black;
     width: 30%;
-    display: flex;
+    display: flex; 
     justify-content: flex-start;
     border-radius: 8px;
     flex-wrap: nowrap;

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import NewElement from "../component/NewElement";
+import NewElement from "../components/NewElement";
 
 function Task(){
     const [list, setList] = useState([]);

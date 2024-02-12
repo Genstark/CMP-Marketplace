@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect} from "react";
-import Header from "../component/Header.jsx";
+import Header from "../components/Header.jsx";
 import '../styling/TestingComponent.css';
 import { useNavigate } from "react-router-dom";
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../styling/Home.css';
-import Header from '../component/Header.jsx';
-import LoadingBar from "../component/Loading.jsx";
+import Header from '../components/Header.jsx';
+import LoadingBar from "../components/Loading.jsx";
 import { useNavigate } from "react-router-dom";
 
 function HomePage(){

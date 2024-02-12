@@ -40,12 +40,6 @@ app.use(cors({
 }));
 
 
-// app.use(cors({
-//     origin: 'https://cmp-marketplace.netlify.app',
-//     methods: 'GET, PUT, PATCH, DELETE, POST',
-//     credentials: true
-// }));
-
 const uri = "U2FsdGVkX19+f6CAlwEFqvnpO5Nz5122QT5AuJpE3FmjJayvf0iusYU4h5fDnBAp8NdbMvX+AEvC6k6J+BzNxI/Zn04BdsC6LWfxbPAFTznSx0GuNbdB/4j65BOHKFJiLKJB+hGvTTj5CshiP6pqPwHXFTBm8r4cEsSDbIbgyu2AnaIuyZfsz+vgCU4jS+mZ";
 
 const PORT = process.env.PORT || 2000;
@@ -178,7 +172,8 @@ app.get('/item/profile/:itemId', (req, res) => {
         if(data.length !== 0){
             res.json({
                 message: 'ok',
-                data: data
+                data: data,
+                withItem: true
             });
         }
         else{
@@ -186,7 +181,8 @@ app.get('/item/profile/:itemId', (req, res) => {
                 console.log(data);
                 res.json({
                     message: 'ok',
-                    data: data
+                    data: data,
+                    withItem: false
                 });
             }).catch(error => {
                 console.log(error);
