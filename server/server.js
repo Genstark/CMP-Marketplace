@@ -181,7 +181,7 @@ app.get('/item/profile/:itemId', (req, res) => {
                 console.log(data);
                 res.json({
                     message: 'ok',
-                    data: data,
+                    data: [{userName: data[0].UserName, phoneNumber: data[0].PhoneNumber, Address: '**********'}],
                     withItem: false
                 });
             }).catch(error => {
