@@ -114,6 +114,7 @@ function Header({search, clickSearch, toLoginPage, logout, pressEnter}){
                 <option value="none" alt="nothing">Choose Type</option>
                 <option value="Electronics" alt="Electronics">Electronics</option>
                 <option value="Bike" alt="Bike">Bike</option>
+                {/* <option value="Furniture" alt="Furniture">Furniture</option> */}
             </select>
 
             <button className="searchButton" onClick={() => clickSearch()}>Search</button>

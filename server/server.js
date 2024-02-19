@@ -433,6 +433,49 @@ app.get('/item/search/:query', (req, res) => {
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
+async function categoryItems(query){
+    const client = new MongoClient(Decrypt(uri));
+
+    try{
+        await client.connect();
+        const db = client.db('olx');
+        const collection = db.collection('Items');
+
+        const data = await collection.find({category: query}).toArray();
+
+        return data;
+    }
+    finally{
+        await client.close();
+    }
+}
+
+app.get('/item/search/:query', (req, res) => {
+    const query = req.params.query;
+    categoryItems(query).then(item => {
+        if(data.length !== 0){
+            res.status(200).json({
+                message: 'ok',
+                data: item,
+                withItem: true
+            });
+        }
+        else{
+            res.status(200).json({
+                message: 'ok',
+                data: item,
+                withItem: false
+            });
+        }
+    }).catch(error => {
+        console.log(error);
+        res.status(500).json({message:'Server error'});
+    });
+});
+
+
+/*-------------------------------------------------------------------------------------------------------------------------------- */
+
 // app.get('*', (req, res) => {
 //     res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
 // });

@@ -7,7 +7,7 @@ import Profile from "./pages/Profile.jsx";
 import Task from "./pages/ToDoList.jsx";
 import FindProduct from "./pages/FindProduct.jsx";
 import Login from "./pages/Login.jsx";
-import Signup from "./pages/SignUp.jsx";
+import Signup from "./pages/Signup.jsx";
 import AddItem from "./pages/AddItem.jsx";
 import ComponentTesting from "./pages/TestingComponent.jsx";
 
