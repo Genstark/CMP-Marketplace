@@ -1,6 +1,6 @@
 import React, {useState, useEffect, useRef} from "react";
 import '../styling/AddItem.css';
-import {ImageConvertUrl} from "../functions/imageUrlApi.js";
+import {ImageConvertUrl} from "../functions/ImageUrlApi.js";
 import { useNavigate } from "react-router-dom";
 
 function AddItem(){
