@@ -70,7 +70,7 @@ function Signup(){
 
         const Data = checkingData();
         
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/signIn';
+        const apiUrl = 'http://localhost:2000/signIn';
         const options = {
             method : "POST",
             headers:{

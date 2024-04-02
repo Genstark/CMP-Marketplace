@@ -12,7 +12,7 @@ function HomePage(){
 
     useEffect(() => {
 
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/items';
+        const apiUrl = 'http://localhost:2000/items';
         const options = {
             method: 'GET'
         }

@@ -3,6 +3,7 @@ import '../styling/Login.css';
 import { Encryption } from "../functions/Encryption.js";
 import { useNavigate } from "react-router-dom";
 
+
 function Login(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
@@ -49,7 +50,7 @@ function Login(){
     function login(){
         const Data = checkData();
         
-        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/login';
+        const apiUrl = 'http://localhost:2000/login';
         const options = {
             method: 'POST',
             headers: {'Content-Type':'application/json'},
