@@ -3,7 +3,6 @@ import '../styling/Home.css';
 import Header from '../components/Header.jsx';
 import LoadingBar from "../components/Loading.jsx";
 import { useNavigate } from "react-router-dom";
-
 function HomePage(){
 
     const [apiData, setApiData] = useState([]);
@@ -12,7 +11,7 @@ function HomePage(){
 
     useEffect(() => {
 
-        const apiUrl = 'http://localhost:2000/items';
+        const apiUrl = 'https://cmpmarketplacebackend.onrender.com/items';
         const options = {
             method: 'GET'
         }

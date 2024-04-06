@@ -159,7 +159,7 @@ function AddItem(){
             formData.append('date', data['date']);
     
             
-            const apiUrl = 'http://localhost:2000/addProduct';
+            const apiUrl = 'https://cmpmarketplacebackend.onrender.com/addProduct';
             const options = {
                 method: 'POST',
                 body: formData
