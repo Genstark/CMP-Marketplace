@@ -3,7 +3,6 @@ import '../styling/Home.css';
 import Header from '../components/Header.jsx';
 import LoadingBar from "../components/Loading.jsx";
 import { useNavigate } from "react-router-dom";
-
 function HomePage(){
 
     const [apiData, setApiData] = useState([]);

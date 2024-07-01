@@ -107,7 +107,7 @@ function Header({search, clickSearch, toLoginPage, logout, pressEnter}){
 
     return(
         <div className="home-page">
-            <h3 className="heading" onClick={() => window.location.href = '/'}>Compro Marketplace</h3>
+            <h3 className="heading" onClick={() => window.location.href = '/'}>CMP Market</h3>
             <input type="input" className="userinput" placeholder="search item" onChange={(e) => search(e.target.value)} onKeyDown={pressEnter}/>
 
             <select name="types" id="productType" className="productTypeClass" alt="choose product type" title="choose product type">

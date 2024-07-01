@@ -111,15 +111,17 @@ function SingleProduct(){
     const validImageTypes = ['png', 'jpeg', 'jpg'];
     const isValidImageType = validImageTypes.includes(validImageTypes);
 
+    const arrow = ['<', '>'];
+
     return(
         <>
             <Header search={userSearch} clickSearch={finding} toLoginPage={() => navigate(`/login`)} pressEnter={clickEnter} />
 
             {status ? apiData.map(object => <div className="mainContainer" key={object._id}>
                 <div className="mainItemImage">
-                    <button className="backButton">😂</button>
+                    <button className="backButton" style={{fontWeight:'bold'}}>{arrow[0]}</button>
                     <img src={object['image-1']} alt="main item display" className="image" ref={imageRef}/>
-                    <button className="forwardButton">🤣</button>
+                    <button className="forwardButton" style={{fontWeight:'bold'}}>{arrow[1]}</button>
                 </div>
 
                 <div className="imageCollection">

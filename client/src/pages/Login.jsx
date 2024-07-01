@@ -3,6 +3,7 @@ import '../styling/Login.css';
 import { Encryption } from "../functions/Encryption.js";
 import { useNavigate } from "react-router-dom";
 
+
 function Login(){
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
