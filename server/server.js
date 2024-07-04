@@ -31,14 +31,14 @@ const corsOptions = [
     // Add more configurations if needed
 ];
 
-// app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 
-app.use(cors({
-    origin: 'http://localhost:5173',
-    methods: 'GET, PUT, PATCH, DELETE, POST',
-    credentials: true
-}));
+// app.use(cors({
+//     origin: 'http://localhost:5173',
+//     methods: 'GET, PUT, PATCH, DELETE, POST',
+//     credentials: true
+// }));
 
 
 const uri = "U2FsdGVkX19+f6CAlwEFqvnpO5Nz5122QT5AuJpE3FmjJayvf0iusYU4h5fDnBAp8NdbMvX+AEvC6k6J+BzNxI/Zn04BdsC6LWfxbPAFTznSx0GuNbdB/4j65BOHKFJiLKJB+hGvTTj5CshiP6pqPwHXFTBm8r4cEsSDbIbgyu2AnaIuyZfsz+vgCU4jS+mZ";
@@ -486,7 +486,7 @@ app.post('/upload', upload1.single('file'), (req, res) => {
     const base64Data = Buffer.from(imageData.buffer).toString('base64');
     console.log('wait');
     const prompt1 = "What's category does this image belong? and what image is it answer in -BottleType:bottle-type -Type:type -Category: category -Image: image belong(write what type of object in image not extension) do not use * or any special character";
-    const prompt2 = "What's category does this bottle belong? ['water bottle', 'chemical bottle'] give answer from given array in single line";
+    const prompt2 = "What's category does this bottle belong? ['water bottle', 'chemical bottle', 'medical bottle'] give answer from given array in single line";
     google(base64Data, prompt2).then(data => {
         console.log(data);
         res.send(data);
