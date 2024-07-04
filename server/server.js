@@ -481,16 +481,22 @@ const storage1 = multer.memoryStorage();
 const upload1 = multer({ storage: storage1 });
 
 app.post('/upload', upload1.single('file'), (req, res) => {
-    const imageData = req.file;
-    // console.log(imageData.buffer);
-    const base64Data = Buffer.from(imageData.buffer).toString('base64');
-    console.log('wait');
-    const prompt1 = "What's category does this image belong? and what image is it answer in -BottleType:bottle-type -Type:type -Category: category -Image: image belong(write what type of object in image not extension) do not use * or any special character";
-    const prompt2 = "What's category does this bottle belong? ['water bottle', 'chemical bottle', 'medical bottle'] give answer from given array in single line";
-    google(base64Data, prompt2).then(data => {
-        console.log(data);
-        res.send(data);
-    });
+    try{
+        const imageData = req.file;
+        // console.log(imageData.buffer);
+        const base64Data = Buffer.from(imageData.buffer).toString('base64');
+        console.log('wait');
+        const prompt1 = "What's category does this image belong? and what image is it answer in -BottleType:bottle-type -Type:type -Category: category -Image: image belong(write what type of object in image not extension) do not use * or any special character";
+        const prompt2 = "What's category does this bottle belong? ['water bottle', 'chemical bottle', 'medical bottle'] give answer from given array in single line";
+        google(base64Data, prompt2).then(data => {
+            console.log(data);
+            res.send(data);
+        });
+    }
+    catch(error){
+        console.log(error);
+        res.send('image content issue');
+    }
 });
 
 async function google(img, propmt) {
