@@ -119,7 +119,7 @@ async function getIndividualProductData(productkey){
 
 app.get('/items/:id', (req, res) => {
     const requestId = req.params.id;
-    console.log(requestId);
+    // console.log(requestId);
 
     getIndividualProductData(requestId).then(data => {
         // console.log(data);
@@ -174,7 +174,7 @@ app.get('/item/profile/:itemId', (req, res) => {
     
     getUserDataWithProduct(requesId).then(data => {
         let userOfUser = data['user_id'];
-        console.log(data);
+        // console.log(data);
 
         if(data.length !== 0){
             res.json({
@@ -185,7 +185,7 @@ app.get('/item/profile/:itemId', (req, res) => {
         }
         else{
             getUserProfileDataWithoutProduct(requesId).then(data => {
-                console.log(data);
+                // console.log(data);
                 res.json({
                     message: 'ok',
                     data: [{userName: data[0].UserName, phoneNumber: data[0].PhoneNumber, Address: '**********'}],
@@ -346,7 +346,7 @@ const upload = multer({storage: storage});
 app.post('/addProduct', upload.array('files', 3),(req, res) => {
 
     const userData = req.body;
-    console.log(userData);
+    // console.log(userData);
     // const userId = req.body.token;
     const userId = Decrypt(req.body.token);
     const user = Decrypt(req.body.data);
