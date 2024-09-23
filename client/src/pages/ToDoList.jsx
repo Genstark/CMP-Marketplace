@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import NewElement from "../components/NewElement";
 
 function Task(){
@@ -37,41 +37,32 @@ function Task(){
         // element.parentNode.remove();
     }
 
-    function taskDone(){
-        const span = document.querySelectorAll('.task');
-        const checkbox = document.querySelectorAll('.checkbox');
+    const taskStatus = useRef(null);
+    const [doneTask, setDoneTask] = useState(false);
+    // console.log(doneTask);
 
-        for(let i=0; i < checkbox.length; i++){
-            if(checkbox[i].checked === true){
-                span[i].style.textDecoration = 'line-through';
-                list[i].done = true;
-                break;
-            }
-            else{
-                span[i].style.textDecoration = 'none';
-                list[i].done = false;
-                break;
-            }
-        }
-        
+    function taskDone(event){
+        const index = event.target.checked;
+        setDoneTask(index);
+        setList(list.map(data => data.id === event.target.name ? {...data, done: index} : data ));
     }
 
     return(
         <div>
             <div className="headingContainer">
-                <h1 className="heading">To Do List</h1>
+                {/* <h1 className="heading">To Do List</h1> */}
                 <input type="text" placeholder="enter anything" alt="user input" id="user" className="inputTask" onChange={(e) => setUserInput(e.target.value)} />
                 <button onClick={click} className="addTask">Add Task</button>
             </div>
 
             <div id="mainContainer">
-                {/* {list.map(object => <div key={object.id} className="taskContainer">
-                                        <input type="checkbox" alt="checkbox" className="checkbox" onChange={taskDone} />
-                                        <span className="task">{object.title}</span>
+                {list.map(object => <div key={object.id} className="taskContainer">
+                                        <input type="checkbox" alt="checkbox" className="checkbox" onChange={taskDone} name={object.id} />
+                                        <span className="task" style={{textDecoration: object.done ? 'line-through':'null'}}>{object.title}</span>
                                         <button className="deleteTask" onClick={() => removeItemFunction(object.id)}>Delete</button>
-                                    </div>)} */}
+                                    </div>)}
 
-                {list.map(object => <NewElement key={object.id} id={object.id} title={object.title} removeItem={removeItemFunction} taskDone={taskDone} />)}
+                {/* {list.map(object => <NewElement key={object.id} id={object.id} title={object.title} removeItem={removeItemFunction} taskDone={taskDone} />)} */}
 
             </div>
         </div>

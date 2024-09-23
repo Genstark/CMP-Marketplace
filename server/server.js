@@ -8,6 +8,7 @@ const path = require('path');
 // const chatbot = require('./chat_model/chatBot.js');
 require('dotenv').config();
 const { GoogleGenerativeAI } = require("@google/generative-ai");
+const requestIp = require('request-ip');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
@@ -34,7 +35,8 @@ const corsOptions = [
 app.use(cors(corsOptions));
 
 const middleWare = (req, res, next) => {
-    console.log(req.ip);
+    const clientIp = requestIp.getClientIp(req); 
+    console.log(clientIp);
     next();
 };
 
