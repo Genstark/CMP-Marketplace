@@ -36,7 +36,7 @@ app.use(cors(corsOptions));
 
 const middleWare = (req, res, next) => {
     const clientIp = requestIp.getClientIp(req); 
-    console.log(clientIp);
+    // console.log(clientIp);
     next();
 };
 
