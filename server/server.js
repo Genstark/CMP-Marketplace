@@ -7,16 +7,15 @@ const CryptoJS = require("crypto-js");
 const path = require('path');
 // const chatbot = require('./chat_model/chatBot.js');
 require('dotenv').config();
-const { GoogleGenerativeAI } = require("@google/generative-ai");
 const requestIp = require('request-ip');
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 
-app.use('/public', express.static(path.join(__dirname, 'public'), { 'extensions': ['html', 'js', 'css'] }));
+// app.use('/public', express.static(path.join(__dirname, 'public'), { 'extensions': ['html', 'js', 'css'] }));
 
 // app.use(express.static('client/dist'));
-app.use(express.static('client'));
+app.use(express.static(path.join(__dirname, 'client'), { 'extensions': ['html', 'js', 'css'] }));
 
 const corsOptions = [
     {
@@ -36,7 +35,7 @@ app.use(cors(corsOptions));
 
 const middleWare = (req, res, next) => {
     const clientIp = requestIp.getClientIp(req); 
-    console.log(clientIp);
+    // console.log(clientIp);
     next();
 };
 

@@ -169,7 +169,7 @@ function Profile(){
                         <h1 className="itemName">{object.title}</h1>
                         <p className="itemOverView">{object.overview}</p>
                         <p className="itemLocation">{object.state}</p>
-                        <button className="deleteButton" onClick={(e) => handleDeleteButtonClick(e, object._id)}>{deleteButtonRef}</button>
+                        {/* <button className="deleteButton" onClick={(e) => handleDeleteButtonClick(e, object._id)}>{deleteButtonRef}</button> */}
                     </div>)}
                 </div> : <h1 style={{margin : 'auto'}}>Currently, there are no uploaded items</h1>}
             </div> : <LoadingBar />}
