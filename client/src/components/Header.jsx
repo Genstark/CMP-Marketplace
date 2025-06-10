@@ -1,19 +1,11 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import '../styling/Header.css';
 import userImge from '../image/user.png';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Decrypt } from "../functions/Encryption.js";
 
 
-function Logindropdown({logoutFunction, username}){
-
-    const menuDesign = {
-        backgroundColor: 'cadetblue',
-        borderRadius: 8,
-        borderWidth: 0,
-        marginLeft: 10,
-        fontSize: 18
-    }
+function Logindropdown({username}){
 
     return(
         <div className="loginClass">

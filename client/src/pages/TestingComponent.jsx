@@ -1,5 +1,4 @@
-import React, {useState, useRef, useEffect} from "react";
-import Header from "../components/Header.jsx";
+import {useState, useRef} from "react";
 import '../styling/TestingComponent.css';
 import { useNavigate } from "react-router-dom";
 

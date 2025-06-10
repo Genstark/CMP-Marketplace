@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from "react";
+import {useState, useEffect} from "react";
 import userImge from '../image/user.png';
 import '../styling/Profile.css';
 import Header from '../components/Header.jsx';

@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import '../styling/Home.css';
-import userImge from '../image/user.png';
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Header from '../components/Header.jsx';
 import LoadingBar from "../components/Loading.jsx";
 

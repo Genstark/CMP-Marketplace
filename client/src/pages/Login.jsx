@@ -1,4 +1,4 @@
-import React, {useState, useRef} from "react";
+import {useState, useRef} from "react";
 import '../styling/Login.css';
 import { Encryption } from "../functions/Encryption.js";
 import { useNavigate } from "react-router-dom";
@@ -82,17 +82,6 @@ function Login(){
                 console.log("Error in Fetching data from server");
             });
         }
-    }
-
-
-    function Homepage(){
-        // window.location.href = "/";
-        navigate('/');
-    }
-
-    function registration(){
-        // window.location.href = "/signup";
-        navigate('/signup');
     }
 
     function clickEnter(event){

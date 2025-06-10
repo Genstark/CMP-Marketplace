@@ -89,7 +89,7 @@ app.get('/items', (req, res) => {
     getAllItemsMongoDB().then(data => {
         // console.log(data);
 
-        res.json({
+        res.status(200).json({
             message: 'Success',
             data: data
         });
@@ -124,7 +124,7 @@ app.get('/items/:id', (req, res) => {
 
     getIndividualProductData(requestId).then(data => {
         // console.log(data);
-        res.json({
+        res.status(200).json({
             message: 'success',
             data: data,
         });
@@ -178,7 +178,7 @@ app.get('/item/profile/:itemId', (req, res) => {
         // console.log(data);
 
         if(data.length !== 0){
-            res.json({
+            res.status(200).json({
                 message: 'ok',
                 data: data,
                 withItem: true
@@ -187,7 +187,7 @@ app.get('/item/profile/:itemId', (req, res) => {
         else{
             getUserProfileDataWithoutProduct(requesId).then(data => {
                 // console.log(data);
-                res.json({
+                res.status(200).json({
                     message: 'ok',
                     data: [{userName: data[0].UserName, phoneNumber: data[0].PhoneNumber, Address: '**********'}],
                     withItem: false
@@ -238,7 +238,7 @@ app.post('/signIn', (req, res) => {
     // console.log(userData);
 
     addDataMongodb(userData).then(data => {
-        res.json({
+        res.status(200).json({
             status: "ok",
             data: data
         });
@@ -275,7 +275,7 @@ app.post('/login', (req, res) => {
 
         if(mongoData !== null){
             if(mongoData['UserEmail'] === postData['email'] && Decrypt(mongoData['Password']) === postData['password']){
-                res.json({
+                res.status(200).json({
                     message: "email and password is correct",
                     done: true,
                     token: mongoData['_id'],
@@ -283,14 +283,14 @@ app.post('/login', (req, res) => {
                 });
             }
             else{
-                res.json({
+                res.status(401).json({
                     message: "wrong email or password",
                     done: false
                 });
             }
         }
         else{
-            res.json({
+            res.status(401).json({
                 message: 'Invalid Data',
                 done: null
             });
@@ -368,7 +368,7 @@ app.post('/addProduct', upload.array('files', 3),(req, res) => {
     // }
     
     userAddSellProduct(userData, userId, user).then(data => {
-        res.json({
+        res.status(200).json({
             message: 'success',
             data: 'product is ready to sell'
         });
@@ -398,7 +398,7 @@ app.delete('/item/delete/:itemId', (req, res) => {
     const deleterequest = req.params.itemId;
 
     deleteItem(deleterequest).then(data => {
-        res.json({
+        res.status(200).json({
             message: 'item is delete'
         });
     });
@@ -429,7 +429,7 @@ app.get('/item/search/:query', (req, res) => {
 
     filterItems(query).then(data => {
         // console.log(data);
-        res.json({
+        res.status(200).json({
             message: 'ok',
             data: data
         });

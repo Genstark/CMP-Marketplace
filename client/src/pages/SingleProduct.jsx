@@ -1,7 +1,6 @@
-import React, {useEffect, useState, useRef} from "react";
+import {useEffect, useState, useRef} from "react";
 import '../styling/SingleProduct.css';
 import userImge from '../image/user.png';
-import { Link } from 'react-router-dom';
 import Header from '../components/Header.jsx';
 import LoadingBar from "../components/Loading.jsx";
 import { useNavigate } from "react-router-dom";

@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import {useState} from "react";
 import '../styling/Signup.css'
 import { useNavigate } from "react-router-dom";
 
@@ -95,16 +95,6 @@ function Signup(){
         }).catch(error => {
             console.log(error);
         });
-    }
-
-    function Homepage(){
-        // window.location.href = "/";
-        navigate('/');
-    }
-
-    function loginPage(){
-        // window.location.href = '/login';
-        navigate('/login');
     }
 
     return(
