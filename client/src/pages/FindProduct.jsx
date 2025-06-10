@@ -22,22 +22,22 @@ function FindProduct(){
         fetch(apiUrl, options).then(res => {
             return res.json();
         }).then(data => {
-            console.log(data);
+            // console.log(data);
             setApiData(data['data']);
             setStatus(true);
         }).catch(error => {
-            console.log('Error');
+            // console.log('Error');
         });
 
 
     }, []);
 
-    console.log(apiData);
+    // console.log(apiData);
 
     const [search, setSearch] = useState('');
     function userSearch(value){
         setSearch(value);
-        console.log(value)
+        // console.log(value)
     }
 
     function finding(){
@@ -53,10 +53,10 @@ function FindProduct(){
         fetch(apiUrl, options).then(res => {
             return res.json();
         }).then(data => {
-            console.log(data);
+            // console.log(data);
             setApiData(data['data']);
         }).catch(error => {
-            console.log('Error');
+            // console.log('Error');
         });
     }
 

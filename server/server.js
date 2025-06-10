@@ -35,7 +35,7 @@ app.use(cors(corsOptions));
 
 const middleWare = (req, res, next) => {
     const clientIp = requestIp.getClientIp(req); 
-    // console.log(clientIp);
+    // // console.log(clientIp);
     next();
 };
 
@@ -87,14 +87,14 @@ async function getAllItemsMongoDB(){
 app.get('/items', (req, res) => {
     
     getAllItemsMongoDB().then(data => {
-        // console.log(data);
+        // // console.log(data);
 
         res.status(200).json({
             message: 'Success',
             data: data
         });
     }).catch(error => {
-        console.log(error);
+        // console.log(error);
     });
 });
 
@@ -120,16 +120,16 @@ async function getIndividualProductData(productkey){
 
 app.get('/items/:id', (req, res) => {
     const requestId = req.params.id;
-    // console.log(requestId);
+    // // console.log(requestId);
 
     getIndividualProductData(requestId).then(data => {
-        // console.log(data);
+        // // console.log(data);
         res.status(200).json({
             message: 'success',
             data: data,
         });
     }).catch(error => {
-        console.log(error);
+        // console.log(error);
     });
 });
 
@@ -171,11 +171,11 @@ async function getUserProfileDataWithoutProduct(userId){
 
 app.get('/item/profile/:itemId', (req, res) => {
     const requesId = req.params.itemId;
-    // console.log(requesId);
+    // // console.log(requesId);
     
     getUserDataWithProduct(requesId).then(data => {
         let userOfUser = data['user_id'];
-        // console.log(data);
+        // // console.log(data);
 
         if(data.length !== 0){
             res.status(200).json({
@@ -186,18 +186,18 @@ app.get('/item/profile/:itemId', (req, res) => {
         }
         else{
             getUserProfileDataWithoutProduct(requesId).then(data => {
-                // console.log(data);
+                // // console.log(data);
                 res.status(200).json({
                     message: 'ok',
                     data: [{userName: data[0].UserName, phoneNumber: data[0].PhoneNumber, Address: '**********'}],
                     withItem: false
                 });
             }).catch(error => {
-                console.log(error);
+                // console.log(error);
             });
         }
     }).catch(err => {
-        console.log(err);
+        // console.log(err);
     });
 });
 
@@ -235,7 +235,7 @@ app.post('/signIn', (req, res) => {
     // userData['_id'] = generateId();
     userData['Password'] = passwordEncrypted;
 
-    // console.log(userData);
+    // // console.log(userData);
 
     addDataMongodb(userData).then(data => {
         res.status(200).json({
@@ -243,7 +243,7 @@ app.post('/signIn', (req, res) => {
             data: data
         });
     }).catch(error => {
-        console.log(error);
+        // console.log(error);
     });
 
 });
@@ -267,11 +267,11 @@ async function loginDataMongodb(useremail){
 
 app.post('/login', (req, res) => {
     const postData = req.body;
-    // console.log(postData);
+    // // console.log(postData);
 
     loginDataMongodb(postData['email']).then(data => {
         const mongoData = data;
-        // console.log(mongoData);
+        // // console.log(mongoData);
 
         if(mongoData !== null){
             if(mongoData['UserEmail'] === postData['email'] && Decrypt(mongoData['Password']) === postData['password']){
@@ -296,7 +296,7 @@ app.post('/login', (req, res) => {
             });
         }
     }).catch(err => {
-        console.log(err);
+        // console.log(err);
     });
 });
 
@@ -347,7 +347,7 @@ const upload = multer({storage: storage});
 app.post('/addProduct', upload.array('files', 3),(req, res) => {
 
     const userData = req.body;
-    // console.log(userData);
+    // // console.log(userData);
     // const userId = req.body.token;
     const userId = Decrypt(req.body.token);
     const user = Decrypt(req.body.data);
@@ -373,7 +373,7 @@ app.post('/addProduct', upload.array('files', 3),(req, res) => {
             data: 'product is ready to sell'
         });
     }).catch(error => {
-        console.log(error);
+        // console.log(error);
     });
 });
 
@@ -428,14 +428,14 @@ app.get('/item/search/:query', (req, res) => {
     const query = req.params.query;
 
     filterItems(query).then(data => {
-        // console.log(data);
+        // // console.log(data);
         res.status(200).json({
             message: 'ok',
             data: data
         });
 
     }).catch(error => {
-        console.log(error);
+        // console.log(error);
     });
 });
 
@@ -476,7 +476,7 @@ app.get('/item/search/:query', (req, res) => {
             });
         }
     }).catch(error => {
-        console.log(error);
+        // console.log(error);
         res.status(500).json({message:'Server error'});
     });
 });
@@ -490,18 +490,18 @@ const upload1 = multer({ storage: storage1 });
 app.post('/upload', upload1.single('file'), (req, res) => {
     try{
         const imageData = req.file;
-        // console.log(imageData.buffer);
+        // // console.log(imageData.buffer);
         const base64Data = Buffer.from(imageData.buffer).toString('base64');
-        console.log('wait');
+        // console.log('wait');
         const prompt1 = "What's category does this image belong? and what image is it answer in -BottleType:bottle-type -Type:type -Category: category -Image: image belong(write what type of object in image not extension) do not use * or any special character";
         const prompt2 = "What's category does this bottle belong? ['water bottle', 'chemical bottle', 'medical bottle', 'alcohol bottle'] give answer from given array in single line";
         google(base64Data, prompt2).then(data => {
-            console.log(data);
+            // console.log(data);
             res.send(data);
         });
     }
     catch(error){
-        console.log(error);
+        // console.log(error);
         res.send('image content issue');
     }
 });
@@ -538,7 +538,7 @@ app.get('*', (req, res) => {
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
 app.listen(PORT, () => {
-    console.log(`Server started on port http://localhost:${PORT}`);
+    // console.log(`Server started on port http://localhost:${PORT}`);
 });
 
 

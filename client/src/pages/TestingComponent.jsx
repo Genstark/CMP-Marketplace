@@ -31,13 +31,13 @@ const Chatbox = () => {
         fetch(apiUrl, options).then(res => {
             return res.json();
         }).then(data => {
-            console.log(data);
+            // console.log(data);
             setMessages((prevMessage) => [...prevMessage, {sender: 'bot', text: data['data']}]);
             setButtonDisable(false);
             setButtonClick('Send');
         }).catch(error => {
-            console.log('model is not working');
-            console.log(error);
+            // console.log('model is not working');
+            // console.log(error);
             setButtonClick('Send');
         });
 

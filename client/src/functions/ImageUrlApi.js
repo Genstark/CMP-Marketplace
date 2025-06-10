@@ -42,7 +42,7 @@ export async function ImageConvertUrl(imageSendByUser){
     try{
         // const response = await fetch(url, options1);
         // const data = await response.json();
-        // console.log(data);
+        // // console.log(data);
         // imageSendByUser = [...imagecollection, data];
 
         const request1 = fetch(url, options1);
@@ -54,6 +54,6 @@ export async function ImageConvertUrl(imageSendByUser){
         });
     } 
     catch(error){
-        console.log(error);
+        // console.log(error);
     }
 }

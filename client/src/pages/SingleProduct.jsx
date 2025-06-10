@@ -43,7 +43,7 @@ function SingleProduct(){
                 // Update state after data is fetched
                 setApiData([data['data']]);
                 setTextareaValue(data['data'].details);
-                console.log(data);
+                // console.log(data);
 
                 setImage1(data['data']['image-1']);
                 setImage2(data['data']['image-2']);
@@ -70,7 +70,7 @@ function SingleProduct(){
         width: 102
     }
 
-    console.log(apiData);
+    // console.log(apiData);
 
     function ToProfilePage(id, username){
         // window.location.href = `/profile/${username}/${id}`;
@@ -80,7 +80,7 @@ function SingleProduct(){
     const [search, setSearch] = useState('');
     function userSearch(value){
         setSearch(value);
-        console.log(value);
+        // console.log(value);
     }
 
     function finding(){

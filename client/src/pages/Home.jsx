@@ -22,12 +22,12 @@ function HomePage(){
             setApiData(data['data']);
             setStatus(true);
         }).catch(error => {
-            console.log("Error in Fetching Data");
+            // console.log("Error in Fetching Data");
         });
 
     }, []);
 
-    console.log(apiData);
+    // console.log(apiData);
 
     function changeLocation(id){
         // window.location.href = `/item/${id}`;
@@ -37,7 +37,7 @@ function HomePage(){
     const [search, setSearch] = useState('');
     function userSearch(value){
         setSearch(value);
-        console.log(value);
+        // console.log(value);
     }
 
     function finding(){
@@ -51,7 +51,7 @@ function HomePage(){
     }
 
     function logout(){
-        console.log('working');
+        // console.log('working');
     }
 
     function clickEnter(event){

@@ -123,11 +123,11 @@ function AddItem(){
     //         try{
     //             const response = await fetch(url, options1);
     //             const data = await response.json();
-    //             console.log(data);
+    //             // console.log(data);
     //             setImagecollection((prevApiData) => [...prevApiData, data]);
     //         } 
     //         catch(error){
-    //             console.log(error);
+    //             // console.log(error);
     //         }
     //     }
     // }
@@ -169,7 +169,7 @@ function AddItem(){
                 fetch(apiUrl, options).then(res => {
                     return res.json();
                 }).then(data => {
-                    console.log(data);
+                    // console.log(data);
                     // setTitle('');
                     // setCategory('');
                     // setAddress('');
@@ -181,7 +181,7 @@ function AddItem(){
                     // setTextareaValue('');
                     setButton('Add Item');
                 }).catch(error => {
-                    console.log(error);
+                    // console.log(error);
                 });
             }
             catch{
@@ -198,7 +198,7 @@ function AddItem(){
     }
 
 
-    // console.log(imagecollection);
+    // // console.log(imagecollection);
 
     return(
         <>

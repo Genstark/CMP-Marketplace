@@ -21,7 +21,7 @@ function Profile(){
             try {
                 const currentUrl = window.location.href;
                 const urlFilter = currentUrl.split('/').pop();
-                console.log(urlFilter);
+                // console.log(urlFilter);
                 const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/profile/${urlFilter}`;
                 const options = {
                     method: 'GET',
@@ -45,7 +45,7 @@ function Profile(){
                 // }
 
                 setStatus(true);
-                console.log(data);
+                // console.log(data);
             } 
             catch (error) {
                 console.error('Error fetching data:', error);
@@ -56,7 +56,7 @@ function Profile(){
 
     }, []);
 
-    console.log(apiData);
+    // console.log(apiData);
 
     function changeLocation(id){
         // window.location.href = `/item/${id}`;
@@ -66,7 +66,7 @@ function Profile(){
     const [search, setSearch] = useState('');
     function userSearch(value){
         setSearch(value);
-        console.log(value);
+        // console.log(value);
     }
 
     function finding(){
@@ -106,7 +106,6 @@ function Profile(){
 
     const handleDeleteButtonClick = (e, objectId) => {
         e.stopPropagation();
-        console.log(`Delete button clicked for object with ID: ${objectId}`);
         const apiUrl = `https://cmpmarketplacebackend.onrender.com/item/delete/${objectId}`;
         const options = {
             method: "DELETE"
@@ -116,9 +115,9 @@ function Profile(){
         fetch(apiUrl, options).then(res => {
             return res.json();
         }).then(data => {
-            console.log(data);
+            alert(data);
         }).catch(error => {
-            console.log(error);
+            // console.log(error);
         });
         
         setApiData(apiData.filter(data => data._id !== objectId));

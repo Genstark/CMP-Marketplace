@@ -13,13 +13,13 @@ function Login(){
     function getUserEmail(event){
         event.preventDefault();
         setUsername(event.target.value);
-        console.log(username);
+        // console.log(username);
     }
 
     function getUserPassword(event){
         event.preventDefault();
         setPassword(event.target.value);
-        console.log(password);
+        // console.log(password);
     }
 
 
@@ -62,7 +62,7 @@ function Login(){
             fetch(apiUrl, options).then(res => {
                 return res.json();
             }).then(data => {
-                console.log(data);
+                // console.log(data);
 
                 if(data.done){
                     sessionStorage.setItem("data", Encryption(data.data));
@@ -79,7 +79,7 @@ function Login(){
 
                 setUserlogin('Login');
             }).catch(error => {
-                console.log("Error in Fetching data from server");
+                // console.log("Error in Fetching data from server");
             });
         }
     }
@@ -95,11 +95,11 @@ function Login(){
 
     function seePassword(event){
         if(event.target.checked === true){
-            console.log('checked');
+            // console.log('checked');
             passwordRef.current.type = 'text';
         }
         else{
-            console.log('not checked');
+            // console.log('not checked');
             passwordRef.current.type = 'password';
         }
     }

@@ -14,22 +14,22 @@ function Signup(){
 
     function getUserName(event){
         setUserName(event.target.value);
-        console.log(event.target.value);
+        // console.log(event.target.value);
     }
 
     function getUserNumber(event){
         setUserNumber(event.target.value);
-        console.log(event.target.value);
+        // console.log(event.target.value);
     }
 
     function getUserEmail(event){
         setUserEmail(event.target.value);
-        console.log(event.target.value);
+        // console.log(event.target.value);
     }
 
     function getUserPassword(event){
         setPassword(event.target.value);
-        console.log(event.target.value);
+        // console.log(event.target.value);
     }
 
     function checkingData(){
@@ -83,7 +83,7 @@ function Signup(){
         fetch(apiUrl, options).then(res => {
             return res.json();
         }).then(data => {
-            console.log(data);
+            // console.log(data);
             setsignupButton('Signup');
             if(data.status === 'ok'){
                 window.location.href = '/login';
@@ -93,7 +93,7 @@ function Signup(){
                 setPassword('');
             }
         }).catch(error => {
-            console.log(error);
+            // console.log(error);
         });
     }
 

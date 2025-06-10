@@ -6,7 +6,7 @@ function Task(){
 
     useEffect(() => {
         // This code block will run after every render, including when arry is updated
-        console.log(list);
+        // console.log(list);
 
     }, [list]);
 
@@ -19,7 +19,7 @@ function Task(){
 
         setList([...list, userData]);
         // createNewELement(userData.title, userData.id);
-        console.log(userInput);
+        // console.log(userInput);
         setUserInput('');
     }
 
@@ -38,7 +38,7 @@ function Task(){
 
     const taskStatus = useRef(null);
     const [doneTask, setDoneTask] = useState(false);
-    // console.log(doneTask);
+    // // console.log(doneTask);
 
     function taskDone(event){
         const index = event.target.checked;
