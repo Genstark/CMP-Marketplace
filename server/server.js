@@ -28,6 +28,11 @@ const corsOptions = [
         methods: 'GET, PUT, PATCH, DELETE, POST',
         credentials: true,
     },
+    {
+        origin: 'http://cmp-market-env.eba-puamekmh.ap-south-1.elasticbeanstalk.com/',
+        methods: 'GET, PUT, PATCH, DELETE, POST',
+        credentials: true,
+    },
     // Add more configurations if needed
 ];
 
