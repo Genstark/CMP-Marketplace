@@ -28,6 +28,11 @@ const corsOptions = [
         methods: 'GET, PUT, PATCH, DELETE, POST',
         credentials: true,
     },
+    {
+        origin: 'http://cmp-market-env.eba-puamekmh.ap-south-1.elasticbeanstalk.com/',
+        methods: 'GET, PUT, PATCH, DELETE, POST',
+        credentials: true,
+    },
     // Add more configurations if needed
 ];
 
@@ -40,12 +45,6 @@ const middleWare = (req, res, next) => {
 };
 
 app.use(middleWare);
-
-// app.use(cors({
-//     origin: 'http://localhost:5173',
-//     methods: 'GET, PUT, PATCH, DELETE, POST',
-//     credentials: true
-// }));
 
 
 const uri = "U2FsdGVkX19+f6CAlwEFqvnpO5Nz5122QT5AuJpE3FmjJayvf0iusYU4h5fDnBAp8NdbMvX+AEvC6k6J+BzNxI/Zn04BdsC6LWfxbPAFTznSx0GuNbdB/4j65BOHKFJiLKJB+hGvTTj5CshiP6pqPwHXFTBm8r4cEsSDbIbgyu2AnaIuyZfsz+vgCU4jS+mZ";
@@ -267,11 +266,11 @@ async function loginDataMongodb(useremail){
 
 app.post('/login', (req, res) => {
     const postData = req.body;
-    // // console.log(postData);
+    // console.log(postData);
 
     loginDataMongodb(postData['email']).then(data => {
         const mongoData = data;
-        // // console.log(mongoData);
+        // console.log(mongoData);
 
         if(mongoData !== null){
             if(mongoData['UserEmail'] === postData['email'] && Decrypt(mongoData['Password']) === postData['password']){
@@ -481,50 +480,6 @@ app.get('/item/search/:query', (req, res) => {
     });
 });
 
-
-/*-------------------------------------------------------------------------------------------------------------------------------- */
-
-const storage1 = multer.memoryStorage();
-const upload1 = multer({ storage: storage1 });
-
-app.post('/upload', upload1.single('file'), (req, res) => {
-    try{
-        const imageData = req.file;
-        // // console.log(imageData.buffer);
-        const base64Data = Buffer.from(imageData.buffer).toString('base64');
-        // console.log('wait');
-        const prompt1 = "What's category does this image belong? and what image is it answer in -BottleType:bottle-type -Type:type -Category: category -Image: image belong(write what type of object in image not extension) do not use * or any special character";
-        const prompt2 = "What's category does this bottle belong? ['water bottle', 'chemical bottle', 'medical bottle', 'alcohol bottle'] give answer from given array in single line";
-        google(base64Data, prompt2).then(data => {
-            // console.log(data);
-            res.send(data);
-        });
-    }
-    catch(error){
-        // console.log(error);
-        res.send('image content issue');
-    }
-});
-
-async function google(img, propmt) {
-    const genAI = new GoogleGenerativeAI('AIzaSyDNcZ2a0KkWuBtVu-Y7zo3EYqG6hm9SQUo');
-    const model = genAI.getGenerativeModel({ model: "gemini-pro-vision" });
-    const image = {
-        inlineData: {
-            data: img,
-            mimeType: "image/png",
-        },
-    }
-    const imagePart = [image];
-    const result = await model.generateContent([propmt, imagePart]);
-    // const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
-    return text;
-}
-
-/*-------------------------------------------------------------------------------------------------------------------------------- */
-
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
 // app.get('*', (req, res) => {
@@ -540,7 +495,6 @@ app.get('*', (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server started on port http://localhost:${PORT}`);
 });
-
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
