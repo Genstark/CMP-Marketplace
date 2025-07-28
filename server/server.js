@@ -96,6 +96,10 @@ app.get('/items', (req, res) => {
         });
     }).catch(error => {
         // console.log(error);
+        res.status(500).json({
+            message: 'Server error',
+            data: error
+        });
     });
 });
 
@@ -131,6 +135,10 @@ app.get('/items/:id', (req, res) => {
         });
     }).catch(error => {
         // console.log(error);
+        res.status(500).json({
+            message: 'Server error',
+            data: error
+        });
     });
 });
 
@@ -199,6 +207,10 @@ app.get('/item/profile/:itemId', (req, res) => {
         }
     }).catch(err => {
         // console.log(err);
+        res.status(500).json({
+            message: 'Server error',
+            done: false
+        });
     });
 });
 
@@ -245,6 +257,10 @@ app.post('/signIn', (req, res) => {
         });
     }).catch(error => {
         // console.log(error);
+        res.status(400).json({
+            status: "error",
+            data: 'Server error'
+        });
     });
 
 });
@@ -298,6 +314,10 @@ app.post('/login', (req, res) => {
         }
     }).catch(err => {
         // console.log(err);
+        res.status(500).json({
+            message: 'Server error',
+            done: false
+        });
     });
 });
 
@@ -375,6 +395,10 @@ app.post('/addProduct', upload.array('files', 3),(req, res) => {
         });
     }).catch(error => {
         // console.log(error);
+        res.status(500).json({
+            message: 'Server error',
+            data: error
+        });
     });
 });
 
@@ -437,6 +461,9 @@ app.get('/item/search/:query', (req, res) => {
 
     }).catch(error => {
         // console.log(error);
+        res.status(500).json({
+            message: 'Server error'
+        });
     });
 });
 
