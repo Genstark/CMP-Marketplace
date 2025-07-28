@@ -40,7 +40,7 @@ app.use(cors(corsOptions));
 
 const middleWare = (req, res, next) => {
     const clientIp = requestIp.getClientIp(req); 
-    // // console.log(clientIp);
+    // console.log(clientIp);
     next();
 };
 
@@ -51,7 +51,9 @@ const uri = "U2FsdGVkX19+f6CAlwEFqvnpO5Nz5122QT5AuJpE3FmjJayvf0iusYU4h5fDnBAp8Nd
 
 const PORT = process.env.PORT || 2000;
 
-
+// const client = new MongoClient(Decry pt(uri));
+// client.connect();
+// console.log('Connected to MongoDB');
 
 /*-------------------------------------------------------------------------------------------------------------------------------- */
 
@@ -86,7 +88,7 @@ async function getAllItemsMongoDB(){
 app.get('/items', (req, res) => {
     
     getAllItemsMongoDB().then(data => {
-        // // console.log(data);
+        // console.log(data);
 
         res.status(200).json({
             message: 'Success',
@@ -119,10 +121,10 @@ async function getIndividualProductData(productkey){
 
 app.get('/items/:id', (req, res) => {
     const requestId = req.params.id;
-    // // console.log(requestId);
+    // console.log(requestId);
 
     getIndividualProductData(requestId).then(data => {
-        // // console.log(data);
+        // console.log(data);
         res.status(200).json({
             message: 'success',
             data: data,
@@ -234,7 +236,7 @@ app.post('/signIn', (req, res) => {
     // userData['_id'] = generateId();
     userData['Password'] = passwordEncrypted;
 
-    // // console.log(userData);
+    // console.log(userData);
 
     addDataMongodb(userData).then(data => {
         res.status(200).json({
